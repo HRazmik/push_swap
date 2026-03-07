@@ -6,12 +6,13 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/06 17:19:26 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/07 19:11:16 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-void print_flags(t_flag *yyy)
+
+void	print_flags(t_flag *yyy)
 {
 	printf("simple: %d\n", yyy->simple);
 	printf("medium: %d\n", yyy->medium);
@@ -19,7 +20,8 @@ void print_flags(t_flag *yyy)
 	printf("adaptive: %d\n", yyy->adaptive);
 	printf("bench: %d\n", yyy->bench);
 }
-void inicial_tflag(t_flag *yyy)
+
+void	inicial_tflag(t_flag *yyy)
 {
 	yyy->simple = 0;
 	yyy->medium = 0;
@@ -30,18 +32,19 @@ void inicial_tflag(t_flag *yyy)
 
 int	main(int argc, char *argv[])
 {
-	t_flag yyy;
-	int	k;
+	t_flag	yyy;
+	int		k;
+
 	if (argc == 1)
 		return (0);
 	k = comp_flag_check(argc, argv, &yyy);
-	if(!k)
+	if (!k)
 	{
 		printf("error occurd\n");
-		return (1);	
+		return (1);
 	}
 	printf("%s\n", *(argv + 1));
-	printf("count of numbers: %d\n", ft_parser(argv + k,argc));
+	printf("count of numbers: %d\n", ft_parser(argv + k, argc));
 	print_flags(&yyy);
 	return (0);
 }
@@ -72,11 +75,11 @@ int	comp_flag_check(int argc, char **argv, t_flag *yyy)
 {
 	int	flags_count;
 	int	i;
-	
+
 	i = 1;
 	flags_count = 0;
 	inicial_tflag(yyy);
-	 while (i <= 2 && i < argc)
+	while (i <= 2 && i < argc)
 	{
 		if (!ft_memcmp(argv[i], "--adaptive", 11))
 			yyy->adaptive = (bool)++flags_count;
