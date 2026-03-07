@@ -6,77 +6,91 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/05 16:10:42 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:19:26 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-int	ft_parser(char const *argv[], int);
-int	num_check(char const *str);
-
-int main(int argc, char const *argv[])
+void print_flags(t_flag *yyy)
 {
+	printf("simple: %d\n", yyy->simple);
+	printf("medium: %d\n", yyy->medium);
+	printf("complex: %d\n", yyy->complex);
+	printf("adaptive: %d\n", yyy->adaptive);
+	printf("bench: %d\n", yyy->bench);
+}
+void inicial_tflag(t_flag *yyy)
+{
+	yyy->simple = 0;
+	yyy->medium = 0;
+	yyy->complex = 0;
+	yyy->adaptive = 0;
+	yyy->bench = 0;
+}
+
+int	main(int argc, char *argv[])
+{
+	t_flag yyy;
+	int	k;
 	if (argc == 1)
 		return (0);
-	printf("count of nuumbers: %d\n", ft_parser(argv, argc));
+	k = comp_flag_check(argc, argv, &yyy);
+	if(!k)
+	{
+		printf("error occurd\n");
+		return (1);	
+	}
+	printf("%s\n", *(argv + 1));
+	printf("count of numbers: %d\n", ft_parser(argv + k,argc));
+	print_flags(&yyy);
 	return (0);
 }
 
-int	ft_parser(char const *argv[], int argc)
+int	tflag_check(t_flag *yyy, int flag_count)
 {
-	int	i;
-	int	j;
-	int k;
-	
+	int	k;
+
 	k = 0;
-	i = 1;
-	while (i < argc)
-	{
-		j = 0;
-		if (ft_isdigit(argv[i][j]) || (argv[i][j] == '-' && ft_isdigit(argv[i][j + 1])))
-		{
-			k++;
-			j++;
-		}
-		
-		if (!num_check(argv[i]))
-			return (0);
-		i++;
-	}
+	if (yyy->adaptive)
+		k++;
+	if (yyy->complex)
+		k++;
+	if (yyy->medium)
+		k++;
+	if (yyy->simple)
+		k++;
+	if (k > 1)
+		return (0);
+	if (yyy->bench)
+		k++;
+	if (!k && k != flag_count)
+		return (0);
 	return (k);
 }
 
-int	num_check(char const *str)
+int	comp_flag_check(int argc, char **argv, t_flag *yyy)
 {
+	int	flags_count;
 	int	i;
-
-	i = 0;
-	while (str[i])
+	
+	i = 1;
+	flags_count = 0;
+	inicial_tflag(yyy);
+	 while (i <= 2 && i < argc)
 	{
-		if (ft_isdigit(str[i]))
-			i++;
-		else
-			return (0);
+		if (!ft_memcmp(argv[i], "--adaptive", 11))
+			yyy->adaptive = (bool)++flags_count;
+		else if (!ft_memcmp(argv[i], "--simple", 9))
+			yyy->simple = (bool)++flags_count;
+		else if (!ft_memcmp(argv[i], "--medium", 9))
+			yyy->medium = (bool)++flags_count;
+		else if (!ft_memcmp(argv[i], "--complex", 10))
+			yyy->complex = (bool)++flags_count;
+		if (!ft_memcmp(argv[i], "--bench", 8))
+			yyy->bench = (bool)++flags_count;
+		i++;
 	}
-	return (1);
-}
-int	flag_check(char const *argv)
-{
-	if (ft_memcmp(argv, "--adaptive", 11))
-		return (1);
-	else if (ft_memcmp(argv, "--simple", 9))
-		return (2);
-	else if (ft_memcmp(argv, "--medium", 9))
-		return (3);
-	else if (ft_memcmp(argv, "--complex", 10))
-		return (4);
-	else
-		return (0);
-}
-
-int	bench_check(char const *argv)
-{
-	if (ft_memcmp(argv, "--bench", 8))
-		return (1);
-	return (0);
+	printf("flags_count: %d\n", flags_count);
+	argv++;
+	return (tflag_check(yyy, flags_count));
 }
