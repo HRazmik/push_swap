@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/07 19:11:16 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:32:06 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,28 @@ int	main(int argc, char *argv[])
 {
 	t_flag	yyy;
 	int		k;
+	int		num_count;
+	int		*arr;
 
 	if (argc == 1)
 		return (0);
 	k = comp_flag_check(argc, argv, &yyy);
-	if (!k)
+	if (k == -1)
 	{
 		printf("error occurd\n");
 		return (1);
 	}
-	printf("%s\n", *(argv + 1));
-	printf("count of numbers: %d\n", ft_parser(argv + k, argc));
-	print_flags(&yyy);
+	num_count = preparser_check(argv, k, argc);
+	if (!num_count)
+		return (1);
+	arr = parser(argv, k, argc, num_count);
+	if (!arr)
+	{
+		printf("error\n");
+		return (1);
+	}
+	for (int i = 0; i < num_count; i++)
+		printf("num: %d\n", arr[i]);
 	return (0);
 }
 
@@ -63,11 +73,11 @@ int	tflag_check(t_flag *yyy, int flag_count)
 	if (yyy->simple)
 		k++;
 	if (k > 1)
-		return (0);
+		return (-1);
 	if (yyy->bench)
 		k++;
-	if (!k && k != flag_count)
-		return (0);
+	if (k && k != flag_count)
+		return (-1);
 	return (k);
 }
 
@@ -93,7 +103,5 @@ int	comp_flag_check(int argc, char **argv, t_flag *yyy)
 			yyy->bench = (bool)++flags_count;
 		i++;
 	}
-	printf("flags_count: %d\n", flags_count);
-	argv++;
 	return (tflag_check(yyy, flags_count));
 }
