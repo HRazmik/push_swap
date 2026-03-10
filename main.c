@@ -3,22 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 15:21:45 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/10 17:58:19 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void print_stack(t_stack_node *head)
+{
+    t_stack_node *current;
+
+    if (head == NULL)
+    {
+		printf("The stack is empty.\n");
+		return;
+    }
+    current = head;
+    printf("Stack Trace:\n");
+    while (current != NULL)
+    {
+        // Printing value and position for debugging
+		printf("[Val: %d | Pos: %d]", current->value, current->position);
+		if (current->next != NULL)
+			printf(" <=> ");
+		else
+			printf(" -> NULL\n");
+		current = current->next;
+    }
+}
 int	main(int argc, char *argv[])
 {
 	t_strat				flags;
 	t_stack_node		*a;
-	t_stack_node		*b;
+//	t_stack_node		*b;
 
 	a = arguments_parsing(argc, argv, &flags);
+	print_stack(a);
 	return (0);
 }
 
@@ -29,23 +52,23 @@ t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags)
 	int		*arr;
 
 	if (argc == 1)
-		exit (0);
-	k = comp_flag_check(argc, argv, &flags);
+		exit(0);
+	k = comp_flag_check(argc, argv, flags);
 	if (k == -1)
 	{
 		ft_putendl_fd("Error", 2);
-		exit (1);
+		exit(1);
 	}
 	num_count = preparser_check(argv, k, argc);
 	if (!num_count)
-		return (1);
+		return (NULL);
 	arr = parser(argv, k, argc, num_count);
 	if (!arr)
 	{
 		ft_putendl_fd("Error", 2);
-		exit (1);
+		exit(1);
 	}
-	return ();
+	return (get_stack_a(arr, num_count));
 }
 
 void	inicial_tflag(t_strat *flags)

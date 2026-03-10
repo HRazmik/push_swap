@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 15:20:40 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/10 17:50:47 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int				numbers_separator(char **argv, int *arr, int i, int *j);
 int				*parser(char **argv, int start_arg, int argc, int arr_len);
 int				comp_flag_check(int argc, char **argv, t_strat *yyy);
 
+void			del_stack(t_stack_node *lst);
+t_stack_node	*lstnew_node(int number, int i, int len);
 t_stack_node	*get_stack_a(int arr[], int len);
 t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags);
 #endif

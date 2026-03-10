@@ -11,7 +11,8 @@ LIBFT	:= $(LIB_DIR)/libft.a
 SRC		:=	main.c \
 			parser.c \
 			parser_utils.c \
-			disorder.c
+			disorder.c \
+			steck_imp.c
 
 OBJ		:= $(SRC:.c=.o)
 
