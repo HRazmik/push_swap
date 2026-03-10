@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   disorder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 11:38:16 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 14:33:22 by rovnania         ###   ########.fr       */
+/*   Created: 2026/03/10 13:31:36 by rovnania          #+#    #+#             */
+/*   Updated: 2026/03/10 15:18:39 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_putendl_fd(char *s, int fd)
+float	calculate_disorder(int arr[], int size)
 {
+	int	mistakes;
+	int	total_pairs;
+	int	j;
 	int	i;
 
 	i = 0;
-	while (s[i])
+	total_pairs = 0;
+	mistakes = 0;
+	while (i < size - 1)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			total_pairs++;
+			if (arr[i] > arr[j])
+				mistakes++;
+			j++;
+		}
 		i++;
-	write(fd, s, i);
-	write(fd, "\n", 1);
+	}
+	if (total_pairs == 0)
+		return (0.0);
+	return ((float)mistakes / total_pairs);
 }

@@ -4,10 +4,14 @@ CFLAGS	:= -Wall -Wextra -Werror -g
 
 NAME	:= push_swap 
 
-LIB_DIR     := libft
-LIBFT       := $(LIB_DIR)/libft.a
+LIB_DIR	:= libft
 
-SRC		:= main.c ft_parser.c
+LIBFT	:= $(LIB_DIR)/libft.a
+
+SRC		:=	main.c \
+			parser.c \
+			parser_utils.c \
+			disorder.c
 
 OBJ		:= $(SRC:.c=.o)
 
@@ -25,9 +29,11 @@ $(LIBFT):
 clean:
 	rm -f $(OBJ)
 	$(MAKE) -C $(LIB_DIR) clean
+
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(LIB_DIR) fclean
+
 re: fclean all
 
 .PHONY: all clean fclean re
