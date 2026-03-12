@@ -6,57 +6,58 @@
 /*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 17:58:19 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:49:54 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void print_stack(t_stack_node *head)
+void	print_stack(t_stack_node *head)
 {
-    t_stack_node *current;
+	t_stack_node *current;
 
-    if (head == NULL)
-    {
-		printf("The stack is empty.\n");
-		return;
-    }
-    current = head;
-    printf("Stack Trace:\n");
-    while (current != NULL)
-    {
-        // Printing value and position for debugging
+	current = head;
+	printf("Stack Trace:\n");
+	while (current != NULL)
+	{
+
 		printf("[Val: %d | Pos: %d]", current->value, current->position);
 		if (current->next != NULL)
 			printf(" <=> ");
 		else
 			printf(" -> NULL\n");
 		current = current->next;
-    }
+	}
 }
+
 int	main(int argc, char *argv[])
 {
 	t_strat				flags;
 	t_stack_node		*a;
 //	t_stack_node		*b;
-
-	a = arguments_parsing(argc, argv, &flags);
+	float				disorder;
+	
+	a = arguments_parsing(argc, argv, &flags, &disorder);
+//	b = NULL;
+	printf("disorder is: %f\n", disorder);
+//	swap_a(a);
 	print_stack(a);
+//	print_stack(a);
 	return (0);
 }
 
-t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags)
+t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags, float *dis)
 {
-	int		k;
-	int		num_count;
-	int		*arr;
-
+	int				k;
+	int				num_count;
+	int				*arr;
+	t_stack_node	*a;
 	if (argc == 1)
 		exit(0);
 	k = comp_flag_check(argc, argv, flags);
 	if (k == -1)
 	{
-		ft_putendl_fd("Error", 2);
+		write(2, "Error\n", 6);
 		exit(1);
 	}
 	num_count = preparser_check(argv, k, argc);
@@ -65,10 +66,13 @@ t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags)
 	arr = parser(argv, k, argc, num_count);
 	if (!arr)
 	{
-		ft_putendl_fd("Error", 2);
+		write(2, "Error\n", 6);
 		exit(1);
 	}
-	return (get_stack_a(arr, num_count));
+	a = get_stack_a(arr, num_count);
+	*dis = calculate_disorder(arr, num_count);
+	free(arr);
+	return (a);
 }
 
 void	inicial_tflag(t_strat *flags)

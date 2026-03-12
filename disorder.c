@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   disorder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:31:36 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 15:18:39 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/11 12:32:12 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ float	calculate_disorder(int arr[], int size)
 		while (j < size)
 		{
 			total_pairs++;
-			if (arr[i] > arr[j])
+			if (arr[i] < arr[j])
 				mistakes++;
 			j++;
 		}

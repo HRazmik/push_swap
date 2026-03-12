@@ -6,7 +6,7 @@
 /*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 18:01:42 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:46:43 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_stack_node	*lstnew_node(int number, int i, int len)
 	if (!new_node)
 	{
 		free(new_node);
-		ft_putendl_fd("Error", 2);
+		write(2, "Error\n", 6);
 		return (NULL);
 	}
 	new_node->value = number;
@@ -70,4 +70,18 @@ void	del_stack(t_stack_node *lst)
 		free(lst);
 		lst = tmp;
 	}
+}
+
+void	swap_a(t_stack_node *stack_a)
+{
+	t_stack_node	*head;
+	t_stack_node	*tmp;
+
+	head = stack_a;
+	tmp = stack_a->next;
+	tmp->prev = NULL;
+	head->next = tmp->next;
+	tmp->next->prev = head;
+	tmp->next = head;
+	head->prev = tmp;
 }

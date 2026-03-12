@@ -6,7 +6,7 @@
 /*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 17:50:47 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:47:41 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int				comp_flag_check(int argc, char **argv, t_strat *yyy);
 void			del_stack(t_stack_node *lst);
 t_stack_node	*lstnew_node(int number, int i, int len);
 t_stack_node	*get_stack_a(int arr[], int len);
-t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags);
+t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags, float *dis);
+void	swap_a(t_stack_node *stack_a);
 #endif
