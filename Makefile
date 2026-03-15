@@ -12,7 +12,11 @@ SRC		:=	main.c \
 			parser.c \
 			parser_utils.c \
 			disorder.c \
-			steck_imp.c
+			steck_imp.c \
+			rotate_operetion.c \
+			revers_operetion.c \
+			swap_operetion.c \
+			push_operetion.c
 
 OBJ		:= $(SRC:.c=.o)
 

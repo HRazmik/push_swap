@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   steck_imp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/12 20:46:43 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:20:10 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_stack_node	*lstnew_node(int number, int i, int len)
 {
 	t_stack_node	*new_node;
 
+	i = 0;
 	new_node = malloc(sizeof(t_stack_node));
 	if (!new_node)
 	{
@@ -52,13 +53,12 @@ t_stack_node	*lstnew_node(int number, int i, int len)
 		return (NULL);
 	}
 	new_node->value = number;
-	new_node->position = i;
+//	new_node->position = i;
 	new_node->stack_size = len;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
-
 
 void	del_stack(t_stack_node *lst)
 {
@@ -70,18 +70,4 @@ void	del_stack(t_stack_node *lst)
 		free(lst);
 		lst = tmp;
 	}
-}
-
-void	swap_a(t_stack_node *stack_a)
-{
-	t_stack_node	*head;
-	t_stack_node	*tmp;
-
-	head = stack_a;
-	tmp = stack_a->next;
-	tmp->prev = NULL;
-	head->next = tmp->next;
-	tmp->next->prev = head;
-	tmp->next = head;
-	head->prev = tmp;
 }

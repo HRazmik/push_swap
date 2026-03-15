@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/12 20:49:54 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:27:51 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	print_stack(t_stack_node *head)
 {
-	t_stack_node *current;
+	t_stack_node	*current;
 
 	current = head;
 	printf("Stack Trace:\n");
 	while (current != NULL)
 	{
-
-		printf("[Val: %d | Pos: %d]", current->value, current->position);
+		printf("[Val: %d ]", current->value);
 		if (current->next != NULL)
 			printf(" <=> ");
 		else
@@ -34,24 +33,27 @@ int	main(int argc, char *argv[])
 {
 	t_strat				flags;
 	t_stack_node		*a;
-//	t_stack_node		*b;
+	t_stack_node		*b;
 	float				disorder;
-	
-	a = arguments_parsing(argc, argv, &flags, &disorder);
-//	b = NULL;
+
+	a = args_parsing(argc, argv, &flags, &disorder);
+	b = NULL;
 	printf("disorder is: %f\n", disorder);
-//	swap_a(a);
 	print_stack(a);
-//	print_stack(a);
+	ra(&a);
+	print_stack(a);
+	rra(&a);
+	print_stack(a);
 	return (0);
 }
 
-t_stack_node	*arguments_parsing(int argc, char **argv, t_strat *flags, float *dis)
+t_stack_node	*args_parsing(int argc, char **argv, t_strat *flags, float *dis)
 {
 	int				k;
 	int				num_count;
 	int				*arr;
 	t_stack_node	*a;
+
 	if (argc == 1)
 		exit(0);
 	k = comp_flag_check(argc, argv, flags);

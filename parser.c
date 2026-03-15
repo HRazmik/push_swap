@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:19:10 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 18:00:00 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:19:04 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 int	preparser_check(char **argv, int start_arg, int argc)
 {
 	int	i;
-//	int	j;
 	int	numbers_count;
 
 	numbers_count = 0;
 	i = start_arg + 1;
 	while (i < argc)
 	{
-//		j = 0;
 		if (!num_check(argv[i], &numbers_count))
 			return (0);
 		i++;
