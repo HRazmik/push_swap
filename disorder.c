@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   disorder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rovnania <rovnania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 12:25:54 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 16:54:24 by rovnania         ###   ########.fr       */
+/*   Created: 2026/03/10 13:31:36 by rovnania          #+#    #+#             */
+/*   Updated: 2026/03/11 12:32:12 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+float	calculate_disorder(int arr[], int size)
 {
-	if (!lst || !new)
-		return ;
-	if (!*lst)
+	int	mistakes;
+	int	total_pairs;
+	int	j;
+	int	i;
+
+	i = 0;
+	total_pairs = 0;
+	mistakes = 0;
+	while (i < size - 1)
 	{
-		*lst = new;
-		return ;
+		j = i + 1;
+		while (j < size)
+		{
+			total_pairs++;
+			if (arr[i] < arr[j])
+				mistakes++;
+			j++;
+		}
+		i++;
 	}
-	new->next = *lst;
-	*lst = new;
+	if (total_pairs == 0)
+		return (0.0);
+	return ((float)mistakes / total_pairs);
 }
