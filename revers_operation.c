@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   revers_operetion.c                                 :+:      :+:    :+:   */
+/*   revers_operation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 14:39:50 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/13 15:20:28 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 19:35:27 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	rrb(t_stack_node **b)
 	write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stack_node **a, t_stack_node **b)
+void	rrr(t_stack_node **a, t_stack_node **b, t_count_opers *op)
 {
 	reverse_rotate(a);
+	op->rrr++;
+	op->all_op++;
 	reverse_rotate(b);
 	write(1, "rrr\n", 4);
 }

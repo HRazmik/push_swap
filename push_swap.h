@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 17:39:38 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 19:34:40 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,16 @@ void			rb(t_stack_node **b);
 void			rr(t_stack_node **a, t_stack_node **b);
 void			rra(t_stack_node **a);
 void			rrb(t_stack_node **b);
-void			rrr(t_stack_node **a, t_stack_node **b);
+void			rrr(t_stack_node **a, t_stack_node **b, t_count_opers *op);
 void			pa(t_stack_node **a, t_stack_node **b);
 void			pb(t_stack_node **a, t_stack_node **b);
 
+//Sorting algorithms 
+void medium_sort(t_stack_node **a, t_stack_node **b);
+void insertion_sort(t_stack_node **a, t_stack_node **b);
+void merge_sort(t_stack_node **a, t_stack_node **b);
+
+//esim e
+int find_min(t_stack_node *a);
+int stack_size(t_stack_node *a);
 #endif
