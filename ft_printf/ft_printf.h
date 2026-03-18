@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 13:44:53 by rovnania          #+#    #+#             */
-/*   Updated: 2026/02/28 12:46:49 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/17 12:37:45 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <stdio.h>
 
 int		ft_printf(const char *fmt, ...);
 int		ft_putstr(char *s, int flag);

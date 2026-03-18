@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/13 15:20:10 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 16:54:53 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_stack_node	*lstnew_node(int number, int i, int len)
 		return (NULL);
 	}
 	new_node->value = number;
-//	new_node->position = i;
 	new_node->stack_size = len;
 	new_node->prev = NULL;
 	new_node->next = NULL;

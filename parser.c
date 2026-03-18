@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:19:10 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/13 15:19:04 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:30:19 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	preparser_check(char **argv, int start_arg, int argc)
 	while (i < argc)
 	{
 		if (!num_check(argv[i], &numbers_count))
-			return (0);
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
 		i++;
 	}
 	return (numbers_count);
@@ -46,8 +49,8 @@ int	num_check(char *str, int *numbers_count)
 		}
 		while (ft_isdigit(str[i]))
 			i++;
-		while (str[i] && str[i] == ' ')
-			i++;
+		if (!space_skip(str, &i))
+			return (0);
 		if (!str[i])
 			return (1);
 		if (moving_checker == i)

@@ -6,17 +6,16 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/15 16:07:04 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:39:38 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft/libft.h"
-# include <stdio.h>
+# include "ft_printf/ft_printf.h"
 # include <stdbool.h>
 # include <limits.h>
-// # include "ft_printf.h"
 
 typedef struct s_stack_node
 {
@@ -26,7 +25,7 @@ typedef struct s_stack_node
 	struct s_stack_node	*next;
 }	t_stack_node;
 
-typedef struct s_count_operetions
+typedef struct s_count_opers
 {
 	int	sa;
 	int	sb;
@@ -39,7 +38,8 @@ typedef struct s_count_operetions
 	int	rra;
 	int	rrb;
 	int	rrr;
-}	t_count_operetions;
+	int	all_op;
+}	t_count_opers;
 
 typedef struct s_strat
 {
@@ -61,11 +61,13 @@ int				preparser_check(char **argv, int start_arg, int argc);
 int				numbers_separator(char **argv, int *arr, int i, int *j);
 int				*parser(char **argv, int start_arg, int argc, int arr_len);
 int				comp_flag_check(int argc, char **argv, t_strat *yyy);
+int				space_skip(char *str, int *i);
 
+void			bench(float disorder, t_count_opers op, t_strat flags);
 void			del_stack(t_stack_node *lst);
 t_stack_node	*lstnew_node(int number, int i, int len);
 t_stack_node	*get_stack_a(int arr[], int len);
-t_stack_node	*args_parsing(int argc, char **argv, t_strat *flags, float *dis);
+t_stack_node	*args_pars(int argc, char **argv, t_strat *flags, float *dis);
 t_stack_node	*lstlast(t_stack_node *lst);
 
 //	operetions

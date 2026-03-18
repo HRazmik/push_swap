@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_operetion.c                                   :+:      :+:    :+:   */
+/*   swap_operation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 15:00:26 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/13 15:27:23 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:39:23 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	swap(t_stack_node **stack)
 	second->prev = NULL;
 	second->next = first;
 	first->prev = second;
-//	first->position = 1;
-//	second->position = 0;
 	*stack = second;
 }
 
