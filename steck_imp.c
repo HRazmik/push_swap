@@ -6,17 +6,17 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 16:54:53 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 19:58:12 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack_node	*get_stack_a(int arr[], int len)
+t_stack	*get_stack_a(int arr[], int len)
 {
-	t_stack_node	*a;
-	t_stack_node	*tmp;
-	t_stack_node	*prev_node;
+	t_stack	*a;
+	t_stack	*tmp;
+	t_stack	*prev_node;
 	int				i;
 
 	i = 0;
@@ -40,12 +40,12 @@ t_stack_node	*get_stack_a(int arr[], int len)
 	return (a);
 }
 
-t_stack_node	*lstnew_node(int number, int i, int len)
+t_stack	*lstnew_node(int number, int i, int len)
 {
-	t_stack_node	*new_node;
+	t_stack	*new_node;
 
 	i = 0;
-	new_node = malloc(sizeof(t_stack_node));
+	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 	{
 		free(new_node);
@@ -59,9 +59,9 @@ t_stack_node	*lstnew_node(int number, int i, int len)
 	return (new_node);
 }
 
-void	del_stack(t_stack_node *lst)
+void	del_stack(t_stack *lst)
 {
-	t_stack_node	*tmp;
+	t_stack	*tmp;
 
 	while (lst)
 	{

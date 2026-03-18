@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   insertionSort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
+/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:37:19 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/16 18:59:09 by narehakobya      ###   ########.fr       */
+/*   Updated: 2026/03/18 20:24:33 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int find_min(t_stack_node *a)
+int find_min(t_stack *a)
 {
     int min;
 
@@ -26,7 +26,7 @@ int find_min(t_stack_node *a)
     return (min);
 }
 
-void min_rotate(t_stack_node **a)
+void min_rotate(t_stack **a)
 {
     int min;
 
@@ -35,13 +35,13 @@ void min_rotate(t_stack_node **a)
         ra(a);
 }
 
-void rotate_until_position(t_stack_node **a, int value)
+void rotate_until_position(t_stack **a, int value)
 {
     while (*a && value > (*a)->value)
         ra(a);
 }
 
-void insertion_sort(t_stack_node **a, t_stack_node **b)
+void insertion_sort(t_stack **a, t_stack **b)
 {
     while (*a)
         pb(a, b);
@@ -49,7 +49,7 @@ void insertion_sort(t_stack_node **a, t_stack_node **b)
     while (*b)
     {
         rotate_until_position(a, (*b)->value);
-        pa(a, b);
+        pa(a, b );
     }
 
     min_rotate(a);

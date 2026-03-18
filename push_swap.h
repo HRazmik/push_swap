@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 19:34:40 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 20:07:22 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include <stdbool.h>
 # include <limits.h>
 
-typedef struct s_stack_node
+typedef struct s_stack
 {
 	int					value;
 	int					stack_size;
-	struct s_stack_node	*prev;
-	struct s_stack_node	*next;
-}	t_stack_node;
+	struct s_stack	*prev;
+	struct s_stack	*next;
+}	t_stack;
 
 typedef struct s_count_opers
 {
@@ -64,31 +64,31 @@ int				comp_flag_check(int argc, char **argv, t_strat *yyy);
 int				space_skip(char *str, int *i);
 
 void			bench(float disorder, t_count_opers op, t_strat flags);
-void			del_stack(t_stack_node *lst);
-t_stack_node	*lstnew_node(int number, int i, int len);
-t_stack_node	*get_stack_a(int arr[], int len);
-t_stack_node	*args_pars(int argc, char **argv, t_strat *flags, float *dis);
-t_stack_node	*lstlast(t_stack_node *lst);
+void			del_stack(t_stack *lst);
+t_stack	*lstnew_node(int number, int i, int len);
+t_stack	*get_stack_a(int arr[], int len);
+t_stack	*args_pars(int argc, char **argv, t_strat *flags, float *dis);
+t_stack	*lstlast(t_stack *lst);
 
-//	operetions
-void			sa(t_stack_node **a);
-void			sb(t_stack_node **b);
-void			ss(t_stack_node **a, t_stack_node **b);
-void			ra(t_stack_node **a);
-void			rb(t_stack_node **b);
-void			rr(t_stack_node **a, t_stack_node **b);
-void			rra(t_stack_node **a);
-void			rrb(t_stack_node **b);
-void			rrr(t_stack_node **a, t_stack_node **b, t_count_opers *op);
-void			pa(t_stack_node **a, t_stack_node **b);
-void			pb(t_stack_node **a, t_stack_node **b);
+//	operations
+void			sa(t_stack **a,t_count_opers *op, bool flag);
+void			sb(t_stack **b,t_count_opers *op, bool flag);
+void			ss(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
+void			ra(t_stack **a,t_count_opers *op, bool flag);
+void			rb(t_stack **b,t_count_opers *op, bool flag);
+void			rr(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
+void			rra(t_stack **a,t_count_opers *op, bool flag);
+void			rrb(t_stack **b,t_count_opers *op, bool flag);
+void			rrr(t_stack **a, t_stack **b, t_count_opers *op, bool flag);
+void			pa(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
+void			pb(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
 
 //Sorting algorithms 
-void medium_sort(t_stack_node **a, t_stack_node **b);
-void insertion_sort(t_stack_node **a, t_stack_node **b);
-void merge_sort(t_stack_node **a, t_stack_node **b);
+void medium_sort(t_stack **a, t_stack **b);
+void insertion_sort(t_stack **a, t_stack **b);
+void merge_sort(t_stack **a, t_stack **b);
 
 //esim e
-int find_min(t_stack_node *a);
-int stack_size(t_stack_node *a);
+int find_min(t_stack *a);
+int stack_size(t_stack *a);
 #endif

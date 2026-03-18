@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 19:28:19 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 19:59:46 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int argc, char *argv[])
 {
 	t_strat				flags;
-	t_stack_node		*a;
-	t_stack_node		*b;
+	t_stack		*a;
+	t_stack		*b;
 	float				disorder;
 
 	a = args_pars(argc, argv, &flags, &disorder);
@@ -41,12 +41,12 @@ int	main(int argc, char *argv[])
 		
 }
 
-t_stack_node	*args_pars(int argc, char **argv, t_strat *flags, float *dis)
+t_stack	*args_pars(int argc, char **argv, t_strat *flags, float *dis)
 {
 	int				k;
 	int				num_count;
 	int				*arr;
-	t_stack_node	*a;
+	t_stack	*a;
 
 	if (argc == 1)
 		exit(0);

@@ -6,13 +6,13 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/18 19:32:25 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 19:59:59 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int find_max(t_stack_node *a)
+int find_max(t_stack *a)
 {
     int max = a->value;
     while (a)
@@ -24,7 +24,7 @@ int find_max(t_stack_node *a)
     return (max);
 }
 
-int find_position(t_stack_node *a, int value)
+int find_position(t_stack *a, int value)
 {
     int i = 0;
     while (a)
@@ -45,7 +45,7 @@ int chunk_size(int n)
     return (i);
 }
 
-void push_chunk(t_stack_node **a, t_stack_node **b, int min, int max)
+void push_chunk(t_stack **a, t_stack **b, int min, int max)
 {
     int size = stack_size(*a);
     int i = 0;
@@ -60,7 +60,7 @@ void push_chunk(t_stack_node **a, t_stack_node **b, int min, int max)
     }
 }
 
-void push_back_max(t_stack_node **a, t_stack_node **b)
+void push_back_max(t_stack **a, t_stack **b)
 {
     int max;
     int pos;
@@ -86,7 +86,7 @@ void push_back_max(t_stack_node **a, t_stack_node **b)
     }
 }
 
-void medium_sort(t_stack_node **a, t_stack_node **b)
+void medium_sort(t_stack **a, t_stack **b)
 {
     int size;
     int chunk;

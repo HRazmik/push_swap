@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_operetion.c                                   :+:      :+:    :+:   */
+/*   push_operation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 15:00:51 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/13 15:23:37 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 20:13:58 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_stack_node **from, t_stack_node **to)
+static void	push(t_stack **from, t_stack **to)
 {
-	t_stack_node	*node;
-	t_stack_node	*tmp;
+	t_stack	*node;
+	t_stack	*tmp;
 
 	if (!from)
 		return ;
@@ -32,14 +32,18 @@ static void	push(t_stack_node **from, t_stack_node **to)
 	*to = node;
 }
 
-void	pa(t_stack_node **a, t_stack_node **b)
+void	pa(t_stack **a, t_stack **b,t_count_opers *op, bool flag)
 {
 	push(b, a);
-	write(1, "pa\n", 3);
+	op->pa;
+	if (flag)
+		write(1, "pa\n", 3);
 }
 
-void	pb(t_stack_node **a, t_stack_node **b)
+void	pb(t_stack **a, t_stack **b,t_count_opers *op, bool flag)
 {
 	push(a, b);
-	write(1, "pb\n", 3);
+	op->pb;
+	if (flag)
+		write(1, "pb\n", 3);
 }
