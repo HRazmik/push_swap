@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/19 18:04:56 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 19:39:55 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void push_back_max(t_stack **a, t_stack **b,t_count_opers *op, bool flag)
         max = find_max(*b);
         pos = find_position(*b, max);
         size = stack_size(*b);
-
         if (pos <= size / 2)
         {
             while ((*b)->value != max)
@@ -104,10 +103,10 @@ void medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
     int start;
     int end;
 
+
     size = stack_size(*a);
     chunk = chunk_size(size);
     min = find_min(*a);
-
     while (*a)
     {
         start = min;
@@ -115,5 +114,5 @@ void medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
         push_chunk(a, b, start, end, op, flag);
         min = end + 1;
     }
-    push_back_max(a, b,op,flag);
+    push_back_max(a, b, op, flag);
 }

@@ -6,16 +6,14 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/19 18:16:31 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 19:13:49 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main()
+int	main(int argc, char *argv[])
 {
-	int argc = 3;
-	char *argv[] = {"--simple", "1 2 3 4 5"};
 	t_strat				flags;
 	t_stack		*a;
 	t_stack		*b;
@@ -38,9 +36,12 @@ int	main()
 			insertion_sort(&a,&b, &op, flag);
 		else if(disorder < 0.5)
 			medium_sort(&a,&b, &op, flag);
-		else
-			medium_sort(&a,&b, &op, flag);
 	}
+	if (flags.bench)
+	{
+		bench(disorder, op, flags);
+	}
+	
 	return (0);
 		
 }
@@ -103,7 +104,8 @@ int	tflag_check(t_strat *flags, int flag_count)
 		k++;
 	if (k && k != flag_count)
 		return (-1);
-	flags->adaptive = 1;
+	if (k == 0 || (k == 1 && flags->bench))
+		flags->adaptive = 1;
 	return (k);
 }
 
