@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ChunkSort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
+/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/19 16:48:23 by narehakobya      ###   ########.fr       */
+/*   Updated: 2026/03/19 18:04:56 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int stack_size(t_stack *k)
+{
+    int len = 0;
+    while (k)
+    {
+        len++;
+        k = k->next;
+    }
+    return (len);
+}
 int find_max(t_stack *a)
 {
     int max = a->value;

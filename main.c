@@ -6,36 +6,40 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 19:59:46 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:16:31 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char *argv[])
+int	main()
 {
+	int argc = 3;
+	char *argv[] = {"--simple", "1 2 3 4 5"};
 	t_strat				flags;
 	t_stack		*a;
 	t_stack		*b;
 	float				disorder;
-
+	t_count_opers op = {0};
+	
 	a = args_pars(argc, argv, &flags, &disorder);
 	b = NULL;
+	bool flag = !flags.bench;
 
 	if(flags.simple)
-		insertion_sort(&a,&b);
+		insertion_sort(&a,&b, &op, flag);
 	else if(flags.medium)
-		medium_sort(&a,&b);
-	else if(flags.complex)
-		merge_sort(&a,&b);
+		medium_sort(&a,&b, &op, flag);
+	// else if(flags.complex)
+	// 	merge_sort(&a,&b, &op, flag);
 	else if(flags.adaptive)
 	{
 		if(disorder < 0.2)
-			insertion_sort(&a,&b);
+			insertion_sort(&a,&b, &op, flag);
 		else if(disorder < 0.5)
-			medium_sort(&a,&b);
+			medium_sort(&a,&b, &op, flag);
 		else
-			merge_sort(&a,&b);
+			medium_sort(&a,&b, &op, flag);
 	}
 	return (0);
 		

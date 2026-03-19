@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 19:58:12 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:01:50 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ t_stack	*get_stack_a(int arr[], int len)
 	int				i;
 
 	i = 0;
-	a = lstnew_node(arr[i], i, len);
+	a = lstnew_node(arr[i]);
 	i++;
 	prev_node = a;
 	while (i < len)
 	{
-		tmp = lstnew_node(arr[i], i, len);
+		tmp = lstnew_node(arr[i]);
 		if (!tmp)
 		{
 			del_stack(a);
@@ -40,11 +40,10 @@ t_stack	*get_stack_a(int arr[], int len)
 	return (a);
 }
 
-t_stack	*lstnew_node(int number, int i, int len)
+t_stack	*lstnew_node(int number)
 {
 	t_stack	*new_node;
 
-	i = 0;
 	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 	{
@@ -53,7 +52,6 @@ t_stack	*lstnew_node(int number, int i, int len)
 		return (NULL);
 	}
 	new_node->value = number;
-	new_node->stack_size = len;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);

@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 14:35:16 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 20:09:34 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:02:16 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	rr(t_stack **a, t_stack **b,t_count_opers *op, bool flag)
 	rotate(a);
 	rotate(b);
 	op->rr++;
-	if (flag);
+	if (flag)
 		write(1, "rr\n", 3);
 }

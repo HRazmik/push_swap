@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
+/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/19 17:11:51 by narehakobya      ###   ########.fr       */
+/*   Updated: 2026/03/19 17:59:31 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				space_skip(char *str, int *i);
 
 void			bench(float disorder, t_count_opers op, t_strat flags);
 void			del_stack(t_stack *lst);
-t_stack	*lstnew_node(int number, int i, int len);
+t_stack	*lstnew_node(int number);
 t_stack	*get_stack_a(int arr[], int len);
 t_stack	*args_pars(int argc, char **argv, t_strat *flags, float *dis);
 t_stack	*lstlast(t_stack *lst);
@@ -84,9 +84,8 @@ void			pa(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
 void			pb(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
 
 //Sorting algorithms 
-//void medium_sort(t_stack **a, t_stack **b);
-void insertion_sort(t_stack **a, t_stack **b);
-void merge_sort(t_stack **a, t_stack **b);
+void medium_sort(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
+void insertion_sort(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
 
 //esim e
 int find_min(t_stack *a);
