@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 20:07:22 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:11:51 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct s_stack
 {
 	int					value;
-	int					stack_size;
+	int					index;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }	t_stack;
@@ -84,7 +84,7 @@ void			pa(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
 void			pb(t_stack **a, t_stack **b,t_count_opers *op, bool flag);
 
 //Sorting algorithms 
-void medium_sort(t_stack **a, t_stack **b);
+//void medium_sort(t_stack **a, t_stack **b);
 void insertion_sort(t_stack **a, t_stack **b);
 void merge_sort(t_stack **a, t_stack **b);
 

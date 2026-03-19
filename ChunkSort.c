@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ChunkSort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/18 19:59:59 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 16:48:23 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int chunk_size(int n)
     return (i);
 }
 
-void push_chunk(t_stack **a, t_stack **b, int min, int max)
+void push_chunk(t_stack **a, t_stack **b, int min, int max, t_count_opers *op, bool flag)
 {
     int size = stack_size(*a);
     int i = 0;
@@ -53,14 +53,14 @@ void push_chunk(t_stack **a, t_stack **b, int min, int max)
     while (i < size)
     {
         if ((*a)->value >= min && (*a)->value <= max)
-            pb(a, b);
+            pb(a, b,op,flag);
         else
-            ra(a);
+            ra(a,op,flag);
         i++;
     }
 }
 
-void push_back_max(t_stack **a, t_stack **b)
+void push_back_max(t_stack **a, t_stack **b,t_count_opers *op, bool flag)
 {
     int max;
     int pos;
@@ -75,18 +75,18 @@ void push_back_max(t_stack **a, t_stack **b)
         if (pos <= size / 2)
         {
             while ((*b)->value != max)
-                rb(b);
+                rb(b,op,flag);
         }
         else
         {
             while ((*b)->value != max)
-                rrb(b);
+                rrb(b,op,flag);
         }
-        pa(b, a);
+        pa(b, a,op,flag);
     }
 }
 
-void medium_sort(t_stack **a, t_stack **b)
+void medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 {
     int size;
     int chunk;
@@ -102,8 +102,8 @@ void medium_sort(t_stack **a, t_stack **b)
     {
         start = min;
         end = min + chunk;
-        push_chunk(a, b, start, end);
+        push_chunk(a, b, start, end, op, flag);
         min = end + 1;
     }
-    push_back_max(a, b);
+    push_back_max(a, b,op,flag);
 }

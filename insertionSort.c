@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insertionSort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:37:19 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/18 20:24:33 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/19 16:46:40 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,31 @@ int find_min(t_stack *a)
     return (min);
 }
 
-void min_rotate(t_stack **a)
+void min_rotate(t_stack **a, t_count_opers *op, bool flag)
 {
     int min;
 
     min = find_min(*a);
     while ((*a)->value != min)
-        ra(a);
+        ra(a,op,flag);
 }
 
-void rotate_until_position(t_stack **a, int value)
+void rotate_pos(t_stack **a, int value, t_count_opers *op, bool flag)
 {
     while (*a && value > (*a)->value)
-        ra(a);
+        ra(a,op,flag);
 }
 
-void insertion_sort(t_stack **a, t_stack **b)
+void insertion_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 {
     while (*a)
-        pb(a, b);
+        pb(a,b,op,flag);
 
     while (*b)
     {
-        rotate_until_position(a, (*b)->value);
-        pa(a, b );
+        rotate_pos(a, (*b)->value,op,flag);
+        pa(a, b, op, flag);
     }
 
-    min_rotate(a);
+    min_rotate(a,op,flag);
 }
