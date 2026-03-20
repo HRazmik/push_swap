@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/20 12:59:37 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 14:37:38 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	push_back_max(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 			while ((*b)->value != max)
 				rrb(b, op, flag);
 		}
-		pa(b, a, op, flag);
+		pa(a, b, op, flag);
 	}
 }
 
@@ -123,6 +123,6 @@ void	medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 		push_chunk(a, b, start, end, op, flag);
 		min = end + 1;
 	}
-	write(1, "123\n", 4);
+	// write(1, "123\n", 4);
 	push_back_max(a, b, op, flag);
 }

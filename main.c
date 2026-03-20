@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/20 12:33:41 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 18:18:32 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ int	main(int argc, char *argv[])
 		insertion_sort(&a, &b, &op, flag);
 	else if (flags.medium)
 		medium_sort(&a, &b, &op, flag);
-	// else if(flags.complex)
-	// 	merge_sort(&a,&b, &op, flag);
+	else if (flags.complex)
+		radix_sort(&a, &b, &op, flag);
 	else if (flags.adaptive)
 	{
 		if (disorder < 0.2)
 			insertion_sort(&a, &b, &op, flag);
 		else if (disorder < 0.5)
 			medium_sort(&a, &b, &op, flag);
+		else
+		radix_sort(&a, &b, &op, flag);
+			
 	}
 	if (flags.bench)
 	{

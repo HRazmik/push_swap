@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/20 12:19:12 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 18:19:30 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ typedef struct s_strat
 	bool			bench;
 }					t_strat;
 
+typedef struct s_arguments
+{
+	t_stack **a;
+	t_stack **b;
+	t_count_opers *op;
+	bool flag;
+} t_argumbents;
+
 void				ft_free(char **arr);
 int					isinteger(char *nptr);
 int					num_check(char *arg, int *k);
@@ -85,11 +93,12 @@ void				pa(t_stack **a, t_stack **b, t_count_opers *op, bool flag);
 void				pb(t_stack **a, t_stack **b, t_count_opers *op, bool flag);
 
 // Sorting algorithms
-void				medium_sort(t_stack **a, t_stack **b, t_count_opers *op,
-						bool flag);
-void				insertion_sort(t_stack **a, t_stack **b, t_count_opers *op,
-						bool flag);
-
+void				medium_sort(t_stack **a, t_stack **b,
+	t_count_opers *op, bool flag);
+void				insertion_sort(t_stack **a, t_stack **b,
+	t_count_opers *op, bool flag);
+void	radix_sort(t_stack **a, t_stack **b,
+			t_count_opers *op, bool flag);
 // esim e
 int					find_min(t_stack *a);
 int					stack_size(t_stack *a);

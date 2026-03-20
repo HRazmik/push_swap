@@ -25,6 +25,7 @@ SRC		:=	main.c \
 			push_operation.c \
 			ChunkSort.c \
 			insertionSort.c \
+			mergeSort.c
 
 OBJ		:= $(SRC:.c=.o)
 
