@@ -22,7 +22,9 @@ SRC		:=	main.c \
 			rotate_operation.c \
 			revers_operation.c \
 			swap_operation.c \
-			push_operation.c
+			push_operation.c \
+			ChunkSort.c \
+			insertionSort.c \
 
 OBJ		:= $(SRC:.c=.o)
 

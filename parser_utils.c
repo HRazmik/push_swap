@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 19:29:09 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 15:16:09 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:41:06 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	isinteger(char *nptr)
 	{
 		number = (number * 10) + nptr[i] - '0';
 		i++;
-		if (sign * number > INT_MAX || sign * number < INT_MIN)
+		if (sign * number > INT_MAX || sign * number < INT_MIN
+			|| (number > 1000000000 && nptr[i]))
 			return (0);
 	}
 	return (1);
@@ -66,4 +67,20 @@ void	ft_free(char **arr)
 		arr[i] = NULL;
 		i++;
 	}
+}
+
+int	space_skip(char *str, int *i)
+{
+	int	starting_point;
+
+	starting_point = *i;
+	while (str[*i] && str[*i] == ' ')
+	{
+		(*i)++;
+	}
+	if (starting_point == 0 && !(str[*i]))
+	{
+		return (0);
+	}
+	return (1);
 }

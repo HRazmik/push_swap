@@ -6,65 +6,54 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/17 13:33:12 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 12:33:41 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(t_stack_node *head)
-{
-	t_stack_node	*current;
-
-	current = head;
-	ft_printf("Stack Trace:\n");
-	while (current != NULL)
-	{
-		ft_printf("[Val: %d ]", current->value);
-		if (current->next != NULL)
-			ft_printf(" <=> ");
-		else
-			ft_printf(" -> NULL\n");
-		current = current->next;
-	}
-}
-
 int	main(int argc, char *argv[])
 {
-	t_strat				flags;
-	t_stack_node		*a;
-	t_stack_node		*b;
-	float				disorder;
-	t_count_opers operetions =	{
-	.sa = 0,
-	.sb = 0,
-	.ss = 0,
-	.pa = 5,
-	.pb = 5,
-	.ra = 10,
-	.rb = 10,
-	.rr = 0,
-	.rra = 0,
-	.rrb = 0,
-	.rrr = 0,
-	.all_op = 30
-};
+	t_strat			flags;
+	t_stack			*a;
+	t_stack			*b;
+	float			disorder;
+	t_count_opers	op = {0};
+	bool			flag;
 
+	
 	a = args_pars(argc, argv, &flags, &disorder);
 	b = NULL;
-	print_stack(a);
+	flag = !flags.bench;
+	if (flags.simple)
+		insertion_sort(&a, &b, &op, flag);
+	else if (flags.medium)
+		medium_sort(&a, &b, &op, flag);
+	// else if(flags.complex)
+	// 	merge_sort(&a,&b, &op, flag);
+	else if (flags.adaptive)
+	{
+		if (disorder < 0.2)
+			insertion_sort(&a, &b, &op, flag);
+		else if (disorder < 0.5)
+			medium_sort(&a, &b, &op, flag);
+	}
 	if (flags.bench)
-		bench(disorder, operetions, flags);
+	{
+		bench(disorder, op, flags);
+	}
 	return (0);
 }
 
-t_stack_node	*args_pars(int argc, char **argv, t_strat *flags, float *dis)
+t_stack	*args_pars(int argc, char **argv, t_strat *flags, float *dis)
 {
-	int				k;
-	int				num_count;
-	int				*arr;
-	t_stack_node	*a;
+	int		k;
+	int		num_count;
+	int		*arr;
+	t_stack	*a;
 
+	if (argc == 1)
+		exit(0);
 	k = comp_flag_check(argc, argv, flags);
 	if (k == -1)
 	{
@@ -73,7 +62,7 @@ t_stack_node	*args_pars(int argc, char **argv, t_strat *flags, float *dis)
 	}
 	num_count = preparser_check(argv, k, argc);
 	if (!num_count)
-			return (NULL);
+		return (NULL);
 	arr = parser(argv, k, argc, num_count);
 	if (!arr)
 	{
@@ -112,9 +101,9 @@ int	tflag_check(t_strat *flags, int flag_count)
 		return (-1);
 	if (flags->bench)
 		k++;
-if (!k && k != flag_count)
+	if (k && k != flag_count)
 		return (-1);
-	if (k == 0)
+	if (k == 0 || (k == 1 && flags->bench))
 		flags->adaptive = 1;
 	return (k);
 }
@@ -126,8 +115,6 @@ int	comp_flag_check(int argc, char **argv, t_strat *flags)
 
 	i = 1;
 	flags_count = 0;
-	if (argc == 1)
-		exit(0);
 	inicial_tflag(flags);
 	while (i <= 2 && i < argc)
 	{

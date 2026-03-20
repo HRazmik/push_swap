@@ -6,26 +6,26 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/17 13:31:16 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 12:19:32 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack_node	*get_stack_a(int arr[], int len)
+t_stack	*get_stack_a(int arr[], int len)
 {
-	t_stack_node	*a;
-	t_stack_node	*tmp;
-	t_stack_node	*prev_node;
-	int				i;
+	t_stack	*a;
+	t_stack	*tmp;
+	t_stack	*prev_node;
+	int		i;
 
 	i = 0;
-	a = lstnew_node(arr[i], i, len);
+	a = lstnew_node(arr[i]);
 	i++;
 	prev_node = a;
 	while (i < len)
 	{
-		tmp = lstnew_node(arr[i], i, len);
+		tmp = lstnew_node(arr[i]);
 		if (!tmp)
 		{
 			del_stack(a);
@@ -40,12 +40,11 @@ t_stack_node	*get_stack_a(int arr[], int len)
 	return (a);
 }
 
-t_stack_node	*lstnew_node(int number, int i, int len)
+t_stack	*lstnew_node(int number)
 {
-	t_stack_node	*new_node;
+	t_stack	*new_node;
 
-	i = 0;
-	new_node = malloc(sizeof(t_stack_node));
+	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 	{
 		free(new_node);
@@ -53,16 +52,14 @@ t_stack_node	*lstnew_node(int number, int i, int len)
 		return (NULL);
 	}
 	new_node->value = number;
-//	new_node->position = i;
-	new_node->stack_size = len;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-void	del_stack(t_stack_node *lst)
+void	del_stack(t_stack *lst)
 {
-	t_stack_node	*tmp;
+	t_stack	*tmp;
 
 	while (lst)
 	{

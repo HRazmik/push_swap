@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   revers_operetion.c                                 :+:      :+:    :+:   */
+/*   revers_operation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 14:39:50 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/13 15:20:28 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 12:19:19 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	reverse_rotate(t_stack_node	**stack)
+static void	reverse_rotate(t_stack **stack)
 {
-	t_stack_node	*first;
-	t_stack_node	*last;
+	t_stack	*first;
+	t_stack	*last;
 
 	first = *stack;
 	if (!first || !first->next)
@@ -28,21 +28,30 @@ static void	reverse_rotate(t_stack_node	**stack)
 	*stack = last;
 }
 
-void	rra(t_stack_node **a)
+void	rra(t_stack **a, t_count_opers *op, bool flag)
 {
 	reverse_rotate(a);
-	write(1, "rra\n", 4);
+	op->rra++;
+	op->all_op++;
+	if (flag)
+		write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack_node **b)
+void	rrb(t_stack **b, t_count_opers *op, bool flag)
 {
 	reverse_rotate(b);
-	write(1, "rrb\n", 4);
+	op->rrb++;
+	op->all_op++;
+	if (flag)
+		write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stack_node **a, t_stack_node **b)
+void	rrr(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
-	write(1, "rrr\n", 4);
+	op->rrr++;
+	op->all_op++;
+	if (flag)
+		write(1, "rrr\n", 4);
 }

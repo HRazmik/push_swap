@@ -6,15 +6,15 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 14:35:16 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/17 13:30:31 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 12:19:17 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack_node	*lstlast(t_stack_node *lst)
+t_stack	*lstlast(t_stack *lst)
 {
-	t_stack_node	*tmp;
+	t_stack	*tmp;
 
 	tmp = lst;
 	if (!lst)
@@ -24,11 +24,11 @@ t_stack_node	*lstlast(t_stack_node *lst)
 	return (tmp);
 }
 
-static void	rotate(t_stack_node **stack)
+static void	rotate(t_stack **stack)
 {
-	t_stack_node	*first;
-	t_stack_node	*last;
-	t_stack_node	*new_head;
+	t_stack	*first;
+	t_stack	*last;
+	t_stack	*new_head;
 
 	first = *stack;
 	if (!first || !first->next)
@@ -42,21 +42,30 @@ static void	rotate(t_stack_node **stack)
 	*stack = new_head;
 }
 
-void	ra(t_stack_node **a)
+void	ra(t_stack **a, t_count_opers *op, bool flag)
 {
 	rotate(a);
-	write(1, "ra\n", 3);
+	op->ra++;
+	op->all_op++;
+	if (flag)
+		write(1, "ra\n", 3);
 }
 
-void	rb(t_stack_node **b)
+void	rb(t_stack **b, t_count_opers *op, bool flag)
 {
 	rotate(b);
-	write(1, "rb\n", 3);
+	op->rb++;
+	op->all_op++;
+	if (flag)
+		write(1, "rb\n", 3);
 }
 
-void	rr(t_stack_node **a, t_stack_node **b)
+void	rr(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 {
 	rotate(a);
 	rotate(b);
-	write(1, "rr\n", 3);
+	op->rr++;
+	op->all_op++;
+	if (flag)
+		write(1, "rr\n", 3);
 }
