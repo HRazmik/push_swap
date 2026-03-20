@@ -6,7 +6,7 @@
 /*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/20 20:31:09 by narehakobya      ###   ########.fr       */
+/*   Updated: 2026/03/20 20:38:09 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,46 +64,58 @@ int	exists_in_range(t_stack *a, int min, int max)
 	return (0);
 }
 
-int	find_nearest_in_range(t_stack *a, int min, int max)
+int	find_best_direction(t_stack *a, int min, int max)
 {
-	int	i;
+	int		i;
+	int		size;
+	t_stack	*tmp;
 
+	size = stack_size(a);
+
+	// forward search (ra)
+	tmp = a;
 	i = 0;
-	while (a)
+	while (tmp)
 	{
-		if (a->value >= min && a->value <= max)
-			return (i);
+		if (tmp->value >= min && tmp->value <= max)
+			break ;
 		i++;
-		a = a->next;
+		tmp = tmp->next;
 	}
-	return (-1);
+
+	// backward distance (rra)
+	int back = size - i;
+
+	if (i <= back)
+		return (i);        // use ra
+	else
+		return (-back);    // use rra
 }
 
 void	push_chunk(t_stack **a, t_stack **b, int min, int max,
 		t_count_opers *op, bool flag)
 {
-	int	pos;
-	int	size;
+	int	move;
 
 	while (exists_in_range(*a, min, max))
 	{
-		pos = find_nearest_in_range(*a, min, max);
-		size = stack_size(*a);
+		move = find_best_direction(*a, min, max);
 
-		if (pos <= size / 2)
+		if (move >= 0)
 		{
-			while (pos-- > 0)
+			while (move-- > 0)
 				ra(a, op, flag);
 		}
 		else
 		{
-			pos = size - pos;
-			while (pos-- > 0)
+			move = -move;
+			while (move-- > 0)
 				rra(a, op, flag);
 		}
+
 		pb(a, b, op, flag);
 
-		// KEY optimization
+		// organize B (important)
 		if ((*b)->value < (min + max) / 2)
 			rb(b, op, flag);
 	}
@@ -135,6 +147,7 @@ void	push_back_max(t_stack **a, t_stack **b,
 		pa(a, b, op, flag);
 	}
 }
+
 void	medium_sort(t_stack **a, t_stack **b,
 		t_count_opers *op, bool flag)
 {
@@ -162,7 +175,6 @@ void	medium_sort(t_stack **a, t_stack **b,
 	}
 	push_back_max(a, b, op, flag);
 }
-
 // int	chunk_size(int n)
 // {
 // 	int	i;
