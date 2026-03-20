@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mergeSort.c                                        :+:      :+:    :+:   */
+/*   RadixSort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:45:09 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/20 18:41:25 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 19:47:49 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	get_max_bits(t_stack *a)
 void	radix_sort(t_stack **a, t_stack **b,
 			t_count_opers *op, bool flag)
 {
+	
 	assign_index(a);
 	int	size;
 	int	max_bits;
@@ -62,6 +63,9 @@ void	radix_sort(t_stack **a, t_stack **b,
 	int	j;
 
 	size = stack_size(*a);
+	if(size == 5)
+		medium_sort(a,b,op,flag);
+		return ;
 	max_bits = get_max_bits(*a);
 	i = 0;
 	while (i < max_bits)
@@ -80,3 +84,4 @@ void	radix_sort(t_stack **a, t_stack **b,
 		i++;
 	}
 }
+
