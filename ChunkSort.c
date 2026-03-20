@@ -6,7 +6,7 @@
 /*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/20 20:38:09 by narehakobya      ###   ########.fr       */
+/*   Updated: 2026/03/20 20:40:20 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,76 +53,35 @@ int	find_position(t_stack *a, int value)
 	return (-1);
 }
 
-int	exists_in_range(t_stack *a, int min, int max)
+int	chunk_size(int n)
 {
-	while (a)
-	{
-		if (a->value >= min && a->value <= max)
-			return (1);
-		a = a->next;
-	}
-	return (0);
-}
+	int	i;
 
-int	find_best_direction(t_stack *a, int min, int max)
-{
-	int		i;
-	int		size;
-	t_stack	*tmp;
-
-	size = stack_size(a);
-
-	// forward search (ra)
-	tmp = a;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->value >= min && tmp->value <= max)
-			break ;
+	i = 1;
+	while (i * i < n)
 		i++;
-		tmp = tmp->next;
-	}
-
-	// backward distance (rra)
-	int back = size - i;
-
-	if (i <= back)
-		return (i);        // use ra
-	else
-		return (-back);    // use rra
+	return (i);
 }
 
 void	push_chunk(t_stack **a, t_stack **b, int min, int max,
 		t_count_opers *op, bool flag)
 {
-	int	move;
+	int	size;
+	int	i;
 
-	while (exists_in_range(*a, min, max))
+	size = stack_size(*a);
+	i = 0;
+	while (i < size)
 	{
-		move = find_best_direction(*a, min, max);
-
-		if (move >= 0)
-		{
-			while (move-- > 0)
-				ra(a, op, flag);
-		}
+		if ((*a)->value >= min && (*a)->value <= max)
+			pb(a, b, op, flag);
 		else
-		{
-			move = -move;
-			while (move-- > 0)
-				rra(a, op, flag);
-		}
-
-		pb(a, b, op, flag);
-
-		// organize B (important)
-		if ((*b)->value < (min + max) / 2)
-			rb(b, op, flag);
+			ra(a, op, flag);
+		i++;
 	}
 }
 
-void	push_back_max(t_stack **a, t_stack **b,
-		t_count_opers *op, bool flag)
+void	push_back_max(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 {
 	int	max;
 	int	pos;
@@ -133,7 +92,6 @@ void	push_back_max(t_stack **a, t_stack **b,
 		max = find_max(*b);
 		pos = find_position(*b, max);
 		size = stack_size(*b);
-
 		if (pos <= size / 2)
 		{
 			while ((*b)->value != max)
@@ -148,24 +106,16 @@ void	push_back_max(t_stack **a, t_stack **b,
 	}
 }
 
-void	medium_sort(t_stack **a, t_stack **b,
-		t_count_opers *op, bool flag)
+void	medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 {
 	int	size;
 	int	chunk;
 	int	min;
 	int	start;
 	int	end;
-
 	size = stack_size(*a);
-
-	if (size <= 100)
-		chunk = 15;
-	else
-		chunk = 40;
-
+	chunk = chunk_size(size);
 	min = find_min(*a);
-
 	while (*a)
 	{
 		start = min;
@@ -173,79 +123,6 @@ void	medium_sort(t_stack **a, t_stack **b,
 		push_chunk(a, b, start, end, op, flag);
 		min = end + 1;
 	}
+	// write(1, "123\n", 4);
 	push_back_max(a, b, op, flag);
 }
-// int	chunk_size(int n)
-// {
-// 	int	i;
-
-// 	i = 1;
-// 	while (i * i < n)
-// 		i++;
-// 	return (i);
-// }
-
-// void	push_chunk(t_stack **a, t_stack **b, int min, int max,
-// 		t_count_opers *op, bool flag)
-// {
-// 	int	size;
-// 	int	i;
-
-// 	size = stack_size(*a);
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		if ((*a)->value >= min && (*a)->value <= max)
-// 			pb(a, b, op, flag);
-// 		else
-// 			ra(a, op, flag);
-// 		i++;
-// 	}
-// }
-
-// void	push_back_max(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
-// {
-// 	int	max;
-// 	int	pos;
-// 	int	size;
-
-// 	while (*b)
-// 	{
-// 		max = find_max(*b);
-// 		pos = find_position(*b, max);
-// 		size = stack_size(*b);
-// 		if (pos <= size / 2)
-// 		{
-// 			while ((*b)->value != max)
-// 				rb(b, op, flag);
-// 		}
-// 		else
-// 		{
-// 			while ((*b)->value != max)
-// 				rrb(b, op, flag);
-// 		}
-// 		pa(a, b, op, flag);
-// 	}
-// }
-
-// void	medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
-// {
-// 	int	size;
-// 	int	chunk;
-// 	int	min;
-// 	int	start;
-// 	int	end;
-// 	size = stack_size(*a);
-// 	chunk = chunk_size(size);
-// 	min = find_min(*a);
-// 	while (*a)
-// 	{
-// 		start = min;
-// 		end = min + chunk;
-// 		push_chunk(a, b, start, end, op, flag);
-// 		min = end + 1;
-// 	}
-// 	// write(1, "123\n", 4);
-// 	push_back_max(a, b, op, flag);
-// }
-
