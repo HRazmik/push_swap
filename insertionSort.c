@@ -3,65 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   insertionSort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:37:19 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/20 12:18:16 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 14:31:18 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_min(t_stack *a)
+int	stack_size(t_stack *stack)
 {
-	int	min;
+	int	count;
 
-	min = a->value;
-	while (a)
+	count = 0;
+	while (stack)
 	{
-		if (a->value < min)
-			min = a->value;
-		a = a->next;
+		stack = stack->next;
+		count++;
+	}
+	return (count);
+}
+
+#include "push_swap.h"
+
+
+void	sort_three(t_stack **a, t_count_opers *op)
+{
+	int	first = (*a)->value;
+	int	second = (*a)->next->value;
+	int	third = (*a)->next->next->value;
+
+	if (first > second && second < third && first < third)
+		sa(a, op, true);
+	else if (first > second && second > third)
+	{
+		sa(a, op, true);
+		rra(a, op, true);
+	}
+	else if (first > second && second < third && first > third)
+		ra(a, op, true);
+	else if (first < second && second > third && first < third)
+	{
+		sa(a, op, true);
+		ra(a, op, true);
+	}
+	else if (first < second && second > third && first > third)
+		rra(a, op, true);
+}
+
+
+static int	get_pos(t_stack *stack, t_stack *target)
+{
+	int	pos = 0;
+	while (stack)
+	{
+		if (stack == target)
+			return (pos);
+		stack = stack->next;
+		pos++;
+	}
+	return (pos);
+}
+
+
+t_stack	*find_min(t_stack *stack)
+{
+	t_stack	*min = stack;
+	while (stack)
+	{
+		if (stack->value < min->value)
+			min = stack;
+		stack = stack->next;
 	}
 	return (min);
 }
 
-void	min_rotate(t_stack **a, t_count_opers *op, bool flag)
+
+void	insertion_sort(t_stack **a, t_stack **b, t_count_opers *op)
 {
-	int	min;
+	int	size = stack_size(*a);
 
-	min = find_min(*a);
-	while ((*a)->value != min)
-		ra(a, op, flag);
-}
-
-void	rotate_pos(t_stack **a, int value, t_count_opers *op, bool flag)
-{
-	t_stack	*start;
-
-	if (!a || !*a)
+	if (size <= 1)
 		return ;
-	start = *a;
-	while (1)
+	if (size == 2)
 	{
-		if ((*a)->value >= value)
-			break ;
-		ra(a, op, flag);
-		if (*a == start)
-			break ;
+		if ((*a)->value > (*a)->next->value)
+			sa(a, op, true);
+		return ;
 	}
-}
 
-void	insertion_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
-{
-	while (*a)
+	while (stack_size(*a) > 3)
 	{
-		pb(a, b, op, flag);
+		t_stack *min = find_min(*a);
+		int pos = get_pos(*a, min);
+		int cur_size = stack_size(*a);
+
+		if (pos <= cur_size / 2)
+			while (*a != min)
+				ra(a, op, true);
+		else
+			while (*a != min)
+				rra(a, op, true);
+		pb(a, b, op, true);
 	}
+
+	sort_three(a, op);
 	while (*b)
-	{
-		rotate_pos(a, (*b)->value, op, flag);
-		pa(a, b, op, flag);
-	}
-	min_rotate(a, op, flag);
+		pa(a, b, op, true);
 }

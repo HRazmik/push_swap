@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/20 18:19:30 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 13:50:53 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,13 @@ void				pb(t_stack **a, t_stack **b, t_count_opers *op, bool flag);
 
 // Sorting algorithms
 void				medium_sort(t_stack **a, t_stack **b,
-	t_count_opers *op, bool flag);
+	t_count_opers *op);
 void				insertion_sort(t_stack **a, t_stack **b,
-	t_count_opers *op, bool flag);
+	t_count_opers *op);
 void	radix_sort(t_stack **a, t_stack **b,
 			t_count_opers *op, bool flag);
 // esim e
-int					find_min(t_stack *a);
+t_stack	*find_min(t_stack *stack);
 int					stack_size(t_stack *a);
+void	assign_index(t_stack *a, int size);
 #endif

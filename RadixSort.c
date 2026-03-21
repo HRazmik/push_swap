@@ -6,33 +6,14 @@
 /*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:45:09 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/20 19:47:49 by narehakobya      ###   ########.fr       */
+/*   Updated: 2026/03/21 14:31:45 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	assign_index(t_stack **a)
-{
-	t_stack	*tmp;
-	t_stack	*cmp;
-	int		index;
+#include "push_swap.h"
 
-	tmp = *a;
-	while (tmp)
-	{
-		index = 0;
-		cmp = *a;
-		while (cmp)
-		{
-			if (cmp->value < tmp->value)
-				index++;
-			cmp = cmp->next;
-		}
-		tmp->index = index;
-		tmp = tmp->next;
-	}
-}
 
 int	get_max_bits(t_stack *a)
 {
@@ -52,20 +33,23 @@ int	get_max_bits(t_stack *a)
 	return (bits);
 }
 
-void	radix_sort(t_stack **a, t_stack **b,
-			t_count_opers *op, bool flag)
+void	radix_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
 {
-	
-	assign_index(a);
 	int	size;
 	int	max_bits;
 	int	i;
 	int	j;
 
-	size = stack_size(*a);
-	if(size == 5)
-		medium_sort(a,b,op,flag);
+	if (!a || !*a)
 		return ;
+	size = stack_size(*a);
+
+	if (size <= 5)
+	{
+		medium_sort(a, b, op); 
+		return ;
+	}
+
 	max_bits = get_max_bits(*a);
 	i = 0;
 	while (i < max_bits)
@@ -73,12 +57,14 @@ void	radix_sort(t_stack **a, t_stack **b,
 		j = 0;
 		while (j < size)
 		{
+
 			if (((*a)->index >> i) & 1)
 				ra(a, op, flag);
 			else
 				pb(a, b, op, flag);
 			j++;
 		}
+
 		while (*b)
 			pa(a, b, op, flag);
 		i++;

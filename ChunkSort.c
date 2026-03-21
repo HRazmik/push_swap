@@ -6,123 +6,124 @@
 /*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/20 20:40:20 by narehakobya      ###   ########.fr       */
+/*   Updated: 2026/03/21 14:31:59 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	stack_size(t_stack *k)
+static int	get_pos(t_stack *stack, t_stack *target)
 {
-	int	len;
-
-	len = 0;
-	while (k)
+	int	pos = 0;
+	while (stack)
 	{
-		len++;
-		k = k->next;
+		if (stack == target)
+			return (pos);
+		stack = stack->next;
+		pos++;
 	}
-	return (len);
+	return (pos);
 }
-int	find_max(t_stack *a)
-{
-	int	max;
 
-	max = a->value;
-	while (a)
+static t_stack	*find_max_node(t_stack *stack)
+{
+	t_stack	*max_node;
+
+	if (!stack)
+		return (NULL);
+	max_node = stack;
+	while (stack)
 	{
-		if (a->value > max)
-			max = a->value;
-		a = a->next;
+		if (stack->index > max_node->index)
+			max_node = stack;
+		stack = stack->next;
 	}
-	return (max);
+	return (max_node);
 }
 
-int	find_position(t_stack *a, int value)
+void	assign_index(t_stack *a, int size)
 {
-	int	i;
+	t_stack	*ptr;
+	t_stack	*highest;
+	int		i;
 
-	i = 0;
-	while (a)
+	ptr = a;
+	while (ptr)
 	{
-		if (a->value == value)
-			return (i);
-		i++;
-		a = a->next;
+		ptr->index = -1;
+		ptr = ptr->next;
 	}
-	return (-1);
-}
 
-int	chunk_size(int n)
-{
-	int	i;
-
-	i = 1;
-	while (i * i < n)
-		i++;
-	return (i);
-}
-
-void	push_chunk(t_stack **a, t_stack **b, int min, int max,
-		t_count_opers *op, bool flag)
-{
-	int	size;
-	int	i;
-
-	size = stack_size(*a);
-	i = 0;
-	while (i < size)
+	i = size;
+	while (--i >= 0)
 	{
-		if ((*a)->value >= min && (*a)->value <= max)
-			pb(a, b, op, flag);
-		else
-			ra(a, op, flag);
-		i++;
+		ptr = a;
+		highest = NULL;
+		while (ptr)
+		{
+			if (ptr->index == -1 && (highest == NULL || ptr->value > highest->value))
+				highest = ptr;
+			ptr = ptr->next;
+		}
+		if (highest)
+			highest->index = i;
 	}
 }
 
-void	push_back_max(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
+static void	push_back_to_a(t_stack **a, t_stack **b, t_count_opers *op)
 {
-	int	max;
-	int	pos;
-	int	size;
+	t_stack	*max;
 
 	while (*b)
 	{
-		max = find_max(*b);
-		pos = find_position(*b, max);
-		size = stack_size(*b);
-		if (pos <= size / 2)
-		{
-			while ((*b)->value != max)
-				rb(b, op, flag);
-		}
+		max = find_max_node(*b);
+		if (get_pos(*b, max) <= stack_size(*b) / 2)
+			while (*b != max)
+				rb(b, op, true);
 		else
-		{
-			while ((*b)->value != max)
-				rrb(b, op, flag);
-		}
-		pa(a, b, op, flag);
+			while (*b != max)
+				rrb(b, op, true);
+		pa(a, b, op, true);
 	}
 }
 
-void	medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
+int	get_chunk_step(int max_index)
 {
+	if (max_index <= 20)
+		return (max_index / 2);
+	else if (max_index <= 100)
+		return (16);
+	else if (max_index <= 500)
+		return (38);
+	else
+		return (max_index / 13);
+}
+
+void	medium_sort(t_stack **a, t_stack **b, t_count_opers *op)
+{
+	int	i;
+	int	range;
 	int	size;
-	int	chunk;
-	int	min;
-	int	start;
-	int	end;
+
+	i = 0;
 	size = stack_size(*a);
-	chunk = chunk_size(size);
-	min = find_min(*a);
+	range = get_chunk_step(size); 
+	
 	while (*a)
 	{
-		start = min;
-		end = min + chunk;
-		push_chunk(a, b, start, end, op, flag);
-		min = end + 1;
+		if ((*a)->index <= i)
+		{
+			pb(a, b, op, true);
+			rb(b, op, true);
+			i++;
+		}
+		else if ((*a)->index <= i + range)
+		{
+			pb(a, b, op, true);
+			i++;
+		}
+		else
+			ra(a, op, true);
 	}
-	// write(1, "123\n", 4);
-	push_back_max(a, b, op, flag);
+	push_back_to_a(a, b, op);
 }

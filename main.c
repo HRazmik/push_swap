@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: narehakobyan <narehakobyan@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/20 18:18:32 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 13:50:30 by narehakobya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ int	main(int argc, char *argv[])
 	a = args_pars(argc, argv, &flags, &disorder);
 	b = NULL;
 	flag = !flags.bench;
+	assign_index(a, stack_size(a));
+	
 	if (flags.simple)
-		insertion_sort(&a, &b, &op, flag);
+		insertion_sort(&a, &b, &op);
 	else if (flags.medium)
-		medium_sort(&a, &b, &op, flag);
+		medium_sort(&a, &b, &op);
 	else if (flags.complex)
 		radix_sort(&a, &b, &op, flag);
 	else if (flags.adaptive)
 	{
 		if (disorder < 0.2)
-			insertion_sort(&a, &b, &op, flag);
+			insertion_sort(&a, &b, &op);
 		else if (disorder < 0.5)
-			medium_sort(&a, &b, &op, flag);
+			medium_sort(&a, &b, &op);
 		else
 		radix_sort(&a, &b, &op, flag);
 			
