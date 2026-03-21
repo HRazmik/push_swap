@@ -6,72 +6,78 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/19 19:13:49 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 19:32:22 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// add to header
+void	sort_hard(t_stack *a, t_stack *b, t_count_opers *op, t_strat flags)
+{
+	if (flags.simple)
+		insertion_sort(&a, &b, op);
+	else if (flags.medium)
+		medium_sort(&a, &b, op);
+	else if (flags.complex)
+		radix_sort(&a, &b, op);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_strat				flags;
-	t_stack		*a;
-	t_stack		*b;
-	float				disorder;
-	t_count_opers op = {0};
-	
+	t_strat			flags;
+	t_stack			*a;
+	t_stack			*b;
+	float			disorder;
+	t_count_opers	op;
+
 	a = args_pars(argc, argv, &flags, &disorder);
 	b = NULL;
-	bool flag = !flags.bench;
-
-	if(flags.simple)
-		insertion_sort(&a,&b, &op, flag);
-	else if(flags.medium)
-		medium_sort(&a,&b, &op, flag);
-	// else if(flags.complex)
-	// 	merge_sort(&a,&b, &op, flag);
-	else if(flags.adaptive)
+	set_opers_zero(&op);
+	if (!flags.adaptive)
+		sort_hard(a, b, &op, flags);
+	else
 	{
-		if(disorder < 0.2)
-			insertion_sort(&a,&b, &op, flag);
-		else if(disorder < 0.5)
-			medium_sort(&a,&b, &op, flag);
+		if (disorder < 0.2)
+			insertion_sort(&a, &b, &op);
+		else if (disorder < 0.5)
+			medium_sort(&a, &b, &op);
+		else
+			radix_sort(&a, &b, &op);
 	}
 	if (flags.bench)
-	{
 		bench(disorder, op, flags);
-	}
-	
 	return (0);
-		
+}
+
+// add to header
+void	write_exit(void)
+{
+	write(2, "Error\n", 6);
+	exit(1);
 }
 
 t_stack	*args_pars(int argc, char **argv, t_strat *flags, float *dis)
 {
-	int				k;
-	int				num_count;
-	int				*arr;
+	int		k;
+	int		num_count;
+	int		*arr;
 	t_stack	*a;
 
 	if (argc == 1)
 		exit(0);
 	k = comp_flag_check(argc, argv, flags);
 	if (k == -1)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		write_exit();
 	num_count = preparser_check(argv, k, argc);
 	if (!num_count)
 		return (NULL);
 	arr = parser(argv, k, argc, num_count);
 	if (!arr)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		write_exit();
 	a = get_stack_a(arr, num_count);
 	*dis = calculate_disorder(arr, num_count);
+	assign_index(a, num_count);
 	free(arr);
 	return (a);
 }
@@ -84,53 +90,3 @@ void	inicial_tflag(t_strat *flags)
 	flags->adaptive = 0;
 	flags->bench = 0;
 }
-
-int	tflag_check(t_strat *flags, int flag_count)
-{
-	int	k;
-
-	k = 0;
-	if (flags->adaptive)
-		k++;
-	if (flags->complex)
-		k++;
-	if (flags->medium)
-		k++;
-	if (flags->simple)
-		k++;
-	if (k > 1)
-		return (-1);
-	if (flags->bench)
-		k++;
-	if (k && k != flag_count)
-		return (-1);
-	if (k == 0 || (k == 1 && flags->bench))
-		flags->adaptive = 1;
-	return (k);
-}
-
-int	comp_flag_check(int argc, char **argv, t_strat *flags)
-{
-	int	flags_count;
-	int	i;
-
-	i = 1;
-	flags_count = 0;
-	inicial_tflag(flags);
-	while (i <= 2 && i < argc)
-	{
-		if (!ft_memcmp(argv[i], "--adaptive", 11))
-			flags->adaptive = (bool)++flags_count;
-		else if (!ft_memcmp(argv[i], "--simple", 9))
-			flags->simple = (bool)++flags_count;
-		else if (!ft_memcmp(argv[i], "--medium", 9))
-			flags->medium = (bool)++flags_count;
-		else if (!ft_memcmp(argv[i], "--complex", 10))
-			flags->complex = (bool)++flags_count;
-		if (!ft_memcmp(argv[i], "--bench", 8))
-			flags->bench = (bool)++flags_count;
-		i++;
-	}
-	return (tflag_check(flags, flags_count));
-}
-

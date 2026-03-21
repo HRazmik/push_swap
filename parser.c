@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:19:10 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/18 17:30:19 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 17:52:03 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ int	preparser_check(char **argv, int start_arg, int argc)
 	while (i < argc)
 	{
 		if (!num_check(argv[i], &numbers_count))
-		{
-			write(2, "Error\n", 6);
-			exit(1);
-		}
+			write_exit();
 		i++;
 	}
 	return (numbers_count);

@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 14:35:16 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/19 18:02:16 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 16:37:56 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,27 @@ static void	rotate(t_stack **stack)
 	*stack = new_head;
 }
 
-void	ra(t_stack **a,t_count_opers *op, bool flag)
+void	ra(t_stack **a, t_count_opers *op)
 {
 	rotate(a);
 	op->ra++;
-	if (flag)
-		write(1, "ra\n", 3);
+	op->all_op++;
+	write(1, "ra\n", 3);
 }
 
-void	rb(t_stack **b,t_count_opers *op, bool flag)
+void	rb(t_stack **b, t_count_opers *op)
 {
 	rotate(b);
 	op->rb++;
-	if (flag)
-		write(1, "rb\n", 3);
+	op->all_op++;
+	write(1, "rb\n", 3);
 }
 
-void	rr(t_stack **a, t_stack **b,t_count_opers *op, bool flag)
+void	rr(t_stack **a, t_stack **b, t_count_opers *op)
 {
 	rotate(a);
 	rotate(b);
 	op->rr++;
-	if (flag)
-		write(1, "rr\n", 3);
+	op->all_op++;
+	write(1, "rr\n", 3);
 }

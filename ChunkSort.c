@@ -6,113 +6,97 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/19 19:39:55 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 19:46:29 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int stack_size(t_stack *k)
+static int	get_pos(t_stack *stack, t_stack *target)
 {
-    int len = 0;
-    while (k)
-    {
-        len++;
-        k = k->next;
-    }
-    return (len);
-}
-int find_max(t_stack *a)
-{
-    int max = a->value;
-    while (a)
-    {
-        if (a->value > max)
-            max = a->value;
-        a = a->next;
-    }
-    return (max);
+	int	pos;
+
+	pos = 0;
+	while (stack)
+	{
+		if (stack == target)
+			return (pos);
+		stack = stack->next;
+		pos++;
+	}
+	return (pos);
 }
 
-int find_position(t_stack *a, int value)
+static t_stack	*find_max_node(t_stack *stack)
 {
-    int i = 0;
-    while (a)
-    {
-        if (a->value == value)
-            return (i);
-        i++;
-        a = a->next;
-    }
-    return (-1);
+	t_stack	*max_node;
+
+	if (!stack)
+		return (NULL);
+	max_node = stack;
+	while (stack)
+	{
+		if (stack->index > max_node->index)
+			max_node = stack;
+		stack = stack->next;
+	}
+	return (max_node);
 }
 
-int chunk_size(int n)
+static void	push_back_to_a(t_stack **a, t_stack **b, t_count_opers *op)
 {
-    int i = 1;
-    while (i * i < n)
-        i++;
-    return (i);
+	t_stack	*max;
+
+	while (*b)
+	{
+		max = find_max_node(*b);
+		if (get_pos(*b, max) <= stack_size(*b) / 2)
+			while (*b != max)
+				rb(b, op);
+		else
+			while (*b != max)
+				rrb(b, op);
+		pa(a, b, op);
+	}
 }
 
-void push_chunk(t_stack **a, t_stack **b, int min, int max, t_count_opers *op, bool flag)
+int	get_chunk_step(int max_index)
 {
-    int size = stack_size(*a);
-    int i = 0;
-
-    while (i < size)
-    {
-        if ((*a)->value >= min && (*a)->value <= max)
-            pb(a, b,op,flag);
-        else
-            ra(a,op,flag);
-        i++;
-    }
+	if (max_index <= 20)
+		return (max_index / 2);
+	else if (max_index <= 100)
+		return (16);
+	else if (max_index <= 500)
+		return (38);
+	else
+		return (max_index / 13);
 }
 
-void push_back_max(t_stack **a, t_stack **b,t_count_opers *op, bool flag)
+int	medium_sort(t_stack **a, t_stack **b, t_count_opers *op)
 {
-    int max;
-    int pos;
-    int size;
+	int	i;
+	int	range;
+	int	size;
 
-    while (*b)
-    {
-        max = find_max(*b);
-        pos = find_position(*b, max);
-        size = stack_size(*b);
-        if (pos <= size / 2)
-        {
-            while ((*b)->value != max)
-                rb(b,op,flag);
-        }
-        else
-        {
-            while ((*b)->value != max)
-                rrb(b,op,flag);
-        }
-        pa(b, a,op,flag);
-    }
-}
-
-void medium_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
-{
-    int size;
-    int chunk;
-    int min;
-    int start;
-    int end;
-
-
-    size = stack_size(*a);
-    chunk = chunk_size(size);
-    min = find_min(*a);
-    while (*a)
-    {
-        start = min;
-        end = min + chunk;
-        push_chunk(a, b, start, end, op, flag);
-        min = end + 1;
-    }
-    push_back_max(a, b, op, flag);
+	i = 0;
+	size = stack_size(*a);
+	range = get_chunk_step(size);
+	while (*a)
+	{
+		if ((*a)->index <= i)
+		{
+			pb(a, b, op);
+			rb(b, op);
+			i++;
+		}
+		else if ((*a)->index <= i + range)
+		{
+			pb(a, b, op);
+			i++;
+		}
+		else
+			ra(a, op);
+	}
+	push_back_to_a(a, b, op);
+	return (0);
 }

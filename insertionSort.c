@@ -6,65 +6,107 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:37:19 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/19 18:51:38 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/21 19:44:15 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int find_min(t_stack *a)
+void	sort_three(t_stack **a, t_count_opers *op)
 {
-    int min;
+	int	first;
+	int	second;
+	int	third;
 
-    min = a->value;
-    while (a)
-    {
-        if (a->value < min)
-            min = a->value;
-        a = a->next;
-    }
-    return (min);
+	first = (*a)->value;
+	second = (*a)->next->value;
+	third = (*a)->next->next->value;
+	if (first > second && second < third && first < third)
+		sa(a, op);
+	else if (first > second && second > third)
+	{
+		sa(a, op);
+		rra(a, op);
+	}
+	else if (first > second && second < third && first > third)
+		ra(a, op);
+	else if (first < second && second > third && first < third)
+	{
+		sa(a, op);
+		ra(a, op);
+	}
+	else if (first < second && second > third && first > third)
+		rra(a, op);
 }
 
-void min_rotate(t_stack **a, t_count_opers *op, bool flag)
+static int	get_pos(t_stack *stack, t_stack *target)
 {
-    int min;
+	int	pos;
 
-    min = find_min(*a);
-    while ((*a)->value != min)
-        ra(a,op,flag);
+	pos = 0;
+	while (stack)
+	{
+		if (stack == target)
+			return (pos);
+		stack = stack->next;
+		pos++;
+	}
+	return (pos);
 }
 
-void rotate_pos(t_stack **a, int value, t_count_opers *op, bool flag)
+t_stack	*find_min(t_stack *stack)
 {
-    t_stack *start;
+	t_stack	*min;
 
-    if (!a || !*a)
-        return;
-
-    start = *a;
-    while (1)
-    {
-        if ((*a)->value >= value)
-            break;
-        ra(a, op, flag);
-        if (*a == start)
-            break;
-    }
+	min = stack;
+	while (stack)
+	{
+		if (stack->value < min->value)
+			min = stack;
+		stack = stack->next;
+	}
+	return (min);
 }
 
-void insertion_sort(t_stack **a, t_stack **b, t_count_opers *op, bool flag)
+// samodeytelnost
+int	hard_sorting(t_stack **a, t_count_opers *op, int size)
 {
-    while (*a)
-    {
+	if (size <= 1)
+		return (1);
+	if (size == 2)
+	{
+		if ((*a)->value > (*a)->next->value)
+			sa(a, op);
+		return (1);
+	}
+	return (0);
+}
 
-        pb(a,b,op,flag);
-    }
-    while (*b)
-    {
-        rotate_pos(a, (*b)->value,op,flag);
-        pa(a, b, op, flag);
-    }
+// inchi ogtagorcel stack_size(*a) erb size-@ arden hachvel es
+void	insertion_sort(t_stack **a, t_stack **b, t_count_opers *op)
+{
+	int		size;
+	t_stack	*min;
+	int		pos;
+	int		cur_size;
 
-    min_rotate(a,op,flag);
+	size = stack_size(*a);
+	if (hard_sorting(a, op, size))
+		return ;
+	while (stack_size(*a) > 3)
+	{
+		min = find_min(*a);
+		pos = get_pos(*a, min);
+		cur_size = stack_size(*a);
+		if (pos <= cur_size / 2)
+			while (*a != min)
+				ra(a, op);
+		else
+			while (*a != min)
+				rra(a, op);
+		pb(a, b, op);
+	}
+	sort_three(a, op);
+	while (*b)
+		pa(a, b, op);
 }

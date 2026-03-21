@@ -15,6 +15,7 @@ PRINTF	:= $(PF_DIR)/libftprintf.a
 LIBS	:= -L$(LIB_DIR) -lft -L$(PF_DIR) -lftprintf
 
 SRC		:=	main.c \
+			main_utils.c \
 			parser.c \
 			parser_utils.c \
 			bench.c \
@@ -25,6 +26,7 @@ SRC		:=	main.c \
 			push_operation.c \
 			ChunkSort.c \
 			insertionSort.c \
+			RadixSort.c
 
 OBJ		:= $(SRC:.c=.o)
 

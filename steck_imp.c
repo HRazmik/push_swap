@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/19 18:01:50 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/20 12:19:32 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_stack	*get_stack_a(int arr[], int len)
 	t_stack	*a;
 	t_stack	*tmp;
 	t_stack	*prev_node;
-	int				i;
+	int		i;
 
 	i = 0;
 	a = lstnew_node(arr[i]);
