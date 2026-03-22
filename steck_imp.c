@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:30:07 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/20 12:19:32 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:10:40 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_stack	*get_stack_a(int arr[], int len)
 		tmp = lstnew_node(arr[i]);
 		if (!tmp)
 		{
-			del_stack(a);
+			del_stack(&a);
 			free(arr);
 			exit(1);
 		}
@@ -57,14 +57,16 @@ t_stack	*lstnew_node(int number)
 	return (new_node);
 }
 
-void	del_stack(t_stack *lst)
+void	del_stack(t_stack **lst)
 {
 	t_stack	*tmp;
 
-	while (lst)
+	while ((*lst))
 	{
-		tmp = lst->prev;
-		free(lst);
-		lst = tmp;
+		tmp = (*lst)->next;
+		free((*lst));
+		(*lst) = NULL;
+		(*lst) = tmp;
 	}
+	(*lst) = NULL;
 }

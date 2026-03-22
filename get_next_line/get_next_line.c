@@ -6,16 +6,16 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:06:54 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/10 15:11:50 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 16:08:38 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*ft_clean_list(t_list *lst)
+t_list_gnl	*ft_clean_list(t_list_gnl *lst)
 {
-	t_list	*current;
-	t_list	*temp;
+	t_list_gnl	*current;
+	t_list_gnl	*temp;
 	char	*remaining_str;
 
 	current = lst;
@@ -41,12 +41,12 @@ t_list	*ft_clean_list(t_list *lst)
 	return (NULL);
 }
 
-int	add_to_list(t_list **lst, char *buffer)
+int	add_to_list(t_list_gnl **lst, char *buffer)
 {
-	t_list	*new_node;
-	t_list	*last_node;
+	t_list_gnl	*new_node;
+	t_list_gnl	*last_node;
 
-	new_node = malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_list_gnl));
 	if (!new_node)
 	{
 		free(buffer);
@@ -64,9 +64,9 @@ int	add_to_list(t_list **lst, char *buffer)
 	return (1);
 }
 
-int	check_new_line(t_list *lst)
+int	check_new_line(t_list_gnl *lst)
 {
-	t_list	*current;
+	t_list_gnl	*current;
 
 	current = lst;
 	while (current)
@@ -78,7 +78,7 @@ int	check_new_line(t_list *lst)
 	return (0);
 }
 
-void	get_buffer(t_list **lst, int fd)
+void	get_buffer(t_list_gnl **lst, int fd)
 {
 	int		read_bytes;
 	int		flag;
@@ -106,7 +106,7 @@ void	get_buffer(t_list **lst, int fd)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*lst;
+	static t_list_gnl	*lst;
 	char			*buffer;
 
 	buffer = 0;

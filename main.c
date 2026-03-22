@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/22 14:24:39 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:08:42 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int	main(int argc, char *argv[])
 	}
 	if (flags.bench)
 		bench(disorder, op, flags);
+	del_stack(&a);
+	ft_printf("thiss = %p\n", a);
+	del_stack(&b);
 	return (0);
 }
 

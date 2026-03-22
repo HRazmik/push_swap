@@ -6,15 +6,15 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:06:57 by marvin            #+#    #+#             */
-/*   Updated: 2026/02/20 12:19:26 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 16:15:34 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_list_gnl	*ft_lstlast(t_list_gnl *lst)
 {
-	t_list	*tmp;
+	t_list_gnl	*tmp;
 
 	tmp = lst;
 	if (!lst)
@@ -24,52 +24,10 @@ t_list	*ft_lstlast(t_list *lst)
 	return (tmp);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (s[i] != '\0')
-	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)(s + i));
-	return (NULL);
-}
-
-char	*ft_strdup(char *src)
-{
-	char	*res;
-	size_t	size;
-	size_t	i;
-
-	if (!src)
-		return (NULL);
-	size = 0;
-	while (src[size])
-		size++;
-	res = malloc(size + 1);
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		res[i] = src[i];
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
-}
-
-char	*strlen_until_nl(t_list *lst)
+char	*strlen_until_nl(t_list_gnl *lst)
 {
 	size_t	len;
-	t_list	*tmp;
+	t_list_gnl	*tmp;
 	char	*str;
 	char	*s;
 
@@ -95,10 +53,10 @@ char	*strlen_until_nl(t_list *lst)
 	return (str);
 }
 
-char	*ft_get_line(t_list *lst)
+char	*ft_get_line(t_list_gnl *lst)
 {
 	size_t	i;
-	t_list	*tmp;
+	t_list_gnl	*tmp;
 	char	*line;
 	char	*dst;
 

@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/22 14:24:14 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:08:32 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int					comp_flag_check(int argc, char **argv, t_strat *yyy);
 int					space_skip(char *str, int *i, bool *space_flag);
 
 void				bench(float disorder, t_count_opers op, t_strat flags);
-void				del_stack(t_stack *lst);
+void				del_stack(t_stack **lst);
 t_stack				*lstnew_node(int number);
 t_stack				*get_stack_a(int arr[], int len);
 t_stack				*args_pars(int argc, char **argv, t_strat *flags,

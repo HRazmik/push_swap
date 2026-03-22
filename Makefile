@@ -1,8 +1,10 @@
 CC		:= cc
 
-CFLAGS	:= -Wall -Wextra -Werror -g
+CFLAGS	:= -Wall -Wextra -Werror -g3
 
 NAME	:= push_swap 
+
+GNL_DIR := get_next_line
 
 LIB_DIR	:= libft
 
@@ -28,7 +30,7 @@ SRC		:=	main.c \
 			insertionSort.c \
 			RadixSort.c
 
-OBJ		:= $(SRC:.c=.o)
+OBJ			:= $(SRC:.c=.o)
 
 all: $(NAME)
 
@@ -38,7 +40,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS)  $(OBJ) $(LIBS) -o $(NAME)
 
-$(LIBFT):
+$(LIBFT): 
 	$(MAKE) -C $(LIB_DIR) all
 
 $(PRINTF):
@@ -46,6 +48,7 @@ $(PRINTF):
 
 clean:
 	rm -f $(OBJ)
+	rm -f $(BONUS_OBJ)
 	$(MAKE) -C $(LIB_DIR) clean
 	$(MAKE) -C $(PF_DIR)  clean
 
@@ -53,9 +56,6 @@ fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(LIB_DIR) fclean
 	$(MAKE) -C $(PF_DIR)  fclean
-
-rm: clean
-	rm -f $(NAME)
 
 re: fclean all
 
