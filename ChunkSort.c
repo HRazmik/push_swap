@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:15:43 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/21 19:46:29 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 14:24:46 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	push_back_to_a(t_stack **a, t_stack **b, t_count_opers *op)
 	while (*b)
 	{
 		max = find_max_node(*b);
-		if (get_pos(*b, max) <= stack_size(*b) / 2)
+		if (get_pos(*b, max) <= stack_size(b) / 2)
 			while (*b != max)
 				rb(b, op);
 		else
@@ -72,14 +72,14 @@ int	get_chunk_step(int max_index)
 		return (max_index / 13);
 }
 
-int	medium_sort(t_stack **a, t_stack **b, t_count_opers *op)
+int	medium_sort(t_stack **a, t_stack **b, t_count_opers *op, int size)
 {
 	int	i;
 	int	range;
-	int	size;
 
 	i = 0;
-	size = stack_size(*a);
+	if (size <= 5)
+		return (insertion_sort(a, b, op, size));
 	range = get_chunk_step(size);
 	while (*a)
 	{
@@ -91,8 +91,8 @@ int	medium_sort(t_stack **a, t_stack **b, t_count_opers *op)
 		}
 		else if ((*a)->index <= i + range)
 		{
-			pb(a, b, op);
 			i++;
+			pb(a, b, op);
 		}
 		else
 			ra(a, op);

@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/21 19:32:22 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 14:24:39 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 void	sort_hard(t_stack *a, t_stack *b, t_count_opers *op, t_strat flags)
 {
 	if (flags.simple)
-		insertion_sort(&a, &b, op);
+		insertion_sort(&a, &b, op, stack_size(&a));
 	else if (flags.medium)
-		medium_sort(&a, &b, op);
+		medium_sort(&a, &b, op, stack_size(&a));
 	else if (flags.complex)
-		radix_sort(&a, &b, op);
+		radix_sort(&a, &b, op, stack_size(&a));
 }
 
 int	main(int argc, char *argv[])
@@ -39,11 +39,11 @@ int	main(int argc, char *argv[])
 	else
 	{
 		if (disorder < 0.2)
-			insertion_sort(&a, &b, &op);
+			insertion_sort(&a, &b, &op, stack_size(&a));
 		else if (disorder < 0.5)
-			medium_sort(&a, &b, &op);
+			medium_sort(&a, &b, &op, stack_size(&a));
 		else
-			radix_sort(&a, &b, &op);
+			radix_sort(&a, &b, &op, stack_size(&a));
 	}
 	if (flags.bench)
 		bench(disorder, op, flags);

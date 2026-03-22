@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 19:32:33 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/21 19:34:48 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 12:01:39 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	set_opers_zero(t_count_opers *op)
 	op->rra = 0;
 	op->rrb = 0;
 	op->rrr = 0;
+	op->all_op = 0;
 }
 
 int	tflag_check(t_strat *flags, int flag_count)

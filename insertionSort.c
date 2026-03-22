@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:37:19 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/21 19:44:15 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 13:46:25 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,19 @@ int	hard_sorting(t_stack **a, t_count_opers *op, int size)
 }
 
 // inchi ogtagorcel stack_size(*a) erb size-@ arden hachvel es
-void	insertion_sort(t_stack **a, t_stack **b, t_count_opers *op)
+int	insertion_sort(t_stack **a, t_stack **b, t_count_opers *op, int size)
 {
-	int		size;
 	t_stack	*min;
 	int		pos;
 	int		cur_size;
 
-	size = stack_size(*a);
 	if (hard_sorting(a, op, size))
-		return ;
-	while (stack_size(*a) > 3)
+		return (0);
+	while (stack_size(a) > 3)
 	{
 		min = find_min(*a);
 		pos = get_pos(*a, min);
-		cur_size = stack_size(*a);
+		cur_size = stack_size(a);
 		if (pos <= cur_size / 2)
 			while (*a != min)
 				ra(a, op);
@@ -109,4 +107,5 @@ void	insertion_sort(t_stack **a, t_stack **b, t_count_opers *op)
 	sort_three(a, op);
 	while (*b)
 		pa(a, b, op);
+	return (0);
 }

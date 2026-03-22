@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:14:00 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/21 19:47:14 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 14:24:14 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					preparser_check(char **argv, int start_arg, int argc);
 int					numbers_separator(char **argv, int *arr, int i, int *j);
 int					*parser(char **argv, int start_arg, int argc, int arr_len);
 int					comp_flag_check(int argc, char **argv, t_strat *yyy);
-int					space_skip(char *str, int *i);
+int					space_skip(char *str, int *i, bool *space_flag);
 
 void				bench(float disorder, t_count_opers op, t_strat flags);
 void				del_stack(t_stack *lst);
@@ -87,13 +87,16 @@ void				pa(t_stack **a, t_stack **b, t_count_opers *op);
 void				pb(t_stack **a, t_stack **b, t_count_opers *op);
 
 // Sorting algorithms
-int					medium_sort(t_stack **a, t_stack **b, t_count_opers *op);
-void				insertion_sort(t_stack **a, t_stack **b, t_count_opers *op);
-int					radix_sort(t_stack **a, t_stack **b, t_count_opers *op);
+int					medium_sort(t_stack **a, t_stack **b, t_count_opers *op,
+						int size);
+int					insertion_sort(t_stack **a, t_stack **b, t_count_opers *op,
+						int size);
+int					radix_sort(t_stack **a, t_stack **b, t_count_opers *op,
+						int size);
 
 // esim e
 t_stack				*find_min(t_stack *stack);
-int					stack_size(t_stack *a);
+int					stack_size(t_stack **a);
 void				assign_index(t_stack *a, int size);
 
 #endif

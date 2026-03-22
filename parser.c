@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:19:10 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/21 17:52:03 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 12:05:40 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ int	preparser_check(char **argv, int start_arg, int argc)
 
 int	num_check(char *str, int *numbers_count)
 {
-	int	i;
-	int	moving_checker;
+	int		i;
+	int		moving_checker;
+	bool	space_flag;
 
 	i = 0;
 	moving_checker = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i])
-			|| (str[i] == '-' && ft_isdigit(str[i + 1]))
+		if (ft_isdigit(str[i]) || (str[i] == '-' && ft_isdigit(str[i + 1]))
 			|| (str[i] == '+' && ft_isdigit(str[i + 1])))
 		{
 			i++;
@@ -46,10 +46,10 @@ int	num_check(char *str, int *numbers_count)
 		}
 		while (ft_isdigit(str[i]))
 			i++;
-		if (!space_skip(str, &i))
-			return (0);
 		if (!str[i])
 			return (1);
+		if (!space_skip(str, &i, &space_flag) || !space_flag)
+			return (0);
 		if (moving_checker == i)
 			break ;
 		moving_checker = i;
@@ -82,7 +82,7 @@ int	*parser(char **argv, int start_arg, int argc, int arr_len)
 
 int	numbers_separator(char **argv, int *arr, int i, int *j)
 {
-	char		**buff;
+	char	**buff;
 
 	if (!ft_strchr(argv[i], ' '))
 	{
