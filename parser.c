@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:19:10 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/22 17:56:29 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 18:04:17 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	numbers_separator(char **argv, int *arr, int i, int *j)
 		while (*buff)
 		{
 			if (!isinteger(*buff) || !repeating_num_check(arr, *j, *buff))
-				return (0);
+				return (ft_free(buff_save), 0);
 			arr[(*j)++] = ft_atoi(*buff);
 			buff++;
 		}
