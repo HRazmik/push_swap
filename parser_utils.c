@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 19:29:09 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/22 14:25:34 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:56:45 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	ft_free(char **arr)
 		arr[i] = NULL;
 		i++;
 	}
+	free(arr);
+	arr = NULL;
 }
 
 int	space_skip(char *str, int *i, bool *space_flag)

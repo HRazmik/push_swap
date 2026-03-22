@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 16:37:19 by narehakobya       #+#    #+#             */
-/*   Updated: 2026/03/22 17:03:45 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:27:01 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	hard_sorting(t_stack **a, t_count_opers *op, int size)
 	return (0);
 }
 
-// inchi ogtagorcel stack_size(*a) erb size-@ arden hachvel es
 int	insertion_sort(t_stack **a, t_stack **b, t_count_opers *op, int size)
 {
 	t_stack	*min;

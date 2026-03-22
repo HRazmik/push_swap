@@ -6,13 +6,12 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:13:22 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/22 17:08:42 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:50:57 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// add to header
 void	sort_hard(t_stack *a, t_stack *b, t_count_opers *op, t_strat flags)
 {
 	if (flags.simple)
@@ -48,12 +47,10 @@ int	main(int argc, char *argv[])
 	if (flags.bench)
 		bench(disorder, op, flags);
 	del_stack(&a);
-	ft_printf("thiss = %p\n", a);
 	del_stack(&b);
 	return (0);
 }
 
-// add to header
 void	write_exit(void)
 {
 	write(2, "Error\n", 6);
@@ -82,6 +79,7 @@ t_stack	*args_pars(int argc, char **argv, t_strat *flags, float *dis)
 	*dis = calculate_disorder(arr, num_count);
 	assign_index(a, num_count);
 	free(arr);
+	arr = NULL;
 	return (a);
 }
 

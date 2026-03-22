@@ -6,7 +6,7 @@
 /*   By: rovnania <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:19:10 by rovnania          #+#    #+#             */
-/*   Updated: 2026/03/22 17:00:52 by rovnania         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:56:29 by rovnania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	*parser(char **argv, int start_arg, int argc, int arr_len)
 int	numbers_separator(char **argv, int *arr, int i, int *j)
 {
 	char	**buff;
+	char	**buff_save;
 
 	if (!ft_strchr(argv[i], ' '))
 	{
@@ -93,6 +94,7 @@ int	numbers_separator(char **argv, int *arr, int i, int *j)
 	else
 	{
 		buff = ft_split(argv[i], ' ');
+		buff_save = buff;
 		while (*buff)
 		{
 			if (!isinteger(*buff) || !repeating_num_check(arr, *j, *buff))
@@ -100,7 +102,7 @@ int	numbers_separator(char **argv, int *arr, int i, int *j)
 			arr[(*j)++] = ft_atoi(*buff);
 			buff++;
 		}
-		ft_free(buff);
+		ft_free(buff_save);
 	}
 	return (1);
 }
